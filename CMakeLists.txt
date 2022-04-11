@@ -15,6 +15,6 @@ find_package(wxWidgets COMPONENTS core base adv stc html REQUIRED)
 include(${wxWidgets_USE_FILE})
 include_directories(lib/scidown/src)
 
-add_executable(MDEditor main.cpp MainApp.cpp MainFrame.cpp MainFrameCust.cpp)
+add_executable(MDEditor src/main/main.cpp src/main/MainApp.cpp src/main/MainFrame.cpp src/main/MainFrameCust.cpp src/main/Converter.cpp src/main/Settings.cpp)
 
 target_link_libraries(MDEditor scidown ${wxWidgets_LIBRARIES})

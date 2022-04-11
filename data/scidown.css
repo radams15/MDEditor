@@ -1,0 +1,182 @@
+table.eq_table {
+	border-collapse: collapse;
+ 	border: 0;
+	width: 100%;
+}
+table.eq_table td, table.eq_table th {
+	border: 0;
+}
+table.eq_table tfoot td {
+ 	border: 0;
+}
+table.eq_table tfoot .links {
+ 	text-align: right;
+ 	border: 0;
+}
+
+td.counter {
+	text-align: right;
+	border: 0;
+}
+
+td.eq_code {
+	width: 100%;
+	border: 0;
+	text-align: center;
+}
+
+.eq_table > tr, td, th, {
+	border: 0;
+}
+
+figure {
+	width: 100%;
+	text-align: center;
+}
+
+figure figcaption {
+	text-align: center;
+	font-size: 11pt;
+}
+
+figure img {
+	max-width: 100%;
+}
+
+code {
+    font-family: monospace;
+}
+
+img {
+	max-width: 100%;
+}
+
+.authors
+{
+	text-align: center;
+	font-size: 14pt;
+	font-weight: bold;
+}
+
+.authors:empty
+{
+	display: none;
+}
+
+
+.affiliation
+{
+	text-align: center;
+}
+
+.affiliation:empty
+{
+	display: none;
+}
+
+.title
+{
+	text-align: center;
+	margin-bottom: 5pt;
+}
+
+.title:empty
+{
+	display: none;
+}
+
+.header{
+  margin-bottom: 20pt;
+}
+
+.header:empty {
+   display: none;
+}
+
+.slide {
+  display: flex;
+  width: 221mm;
+  height: 166mm;
+  margin: 0 auto 20px auto;
+  padding: 0;
+  align-items: center;
+  border: 1px solid #000;
+}
+
+.slide_169 {
+  width: 294mm;
+  height: 166mm;
+}
+
+
+.slide_body {
+  display: block;
+  width: 191mm;
+  height: 136mm;
+  margin: auto;
+  overflow: hidden;
+}
+
+
+.slide_169 > .slide_body {
+  width: 264mm;
+}
+
+.slide figure {
+  width: auto;
+}
+
+.slide figcaption {
+  font-size: 14pt;
+}
+
+
+.slide_body .charter {
+ font-size: 12pt;
+ max-width: 180mm;
+}
+
+.header > .slide_body {
+    height: auto;
+}
+
+.figure > .charter {
+  margin: auto;
+}
+
+.slide_body:empty {
+  display: none;
+}
+
+.slide:empty{
+  display: none;
+}
+
+
+@media print {
+  body  {
+    margin: 0;
+    padding: 0;
+  }
+
+  .slide {
+    page-break-after: always;
+    margin: 0;
+    padding: 0;
+    width: 221mm;
+    min-height: 165.5mm;
+    height: 165.5mm;
+    max-height: 165.5mm;
+    border: none;
+    overflow: hidden;
+    border: 0;
+  }
+
+  .slide_169 {
+    width: 294mm;
+  }
+}
+
+*:not(span){
+  unicode-bidi: plaintext;
+}
