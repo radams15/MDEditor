@@ -1,3 +1,0 @@
-[submodule "lib/cmark"]
-	path = lib/cmark
-	url = https://github.com/commonmark/cmark
