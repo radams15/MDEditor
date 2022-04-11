@@ -439,7 +439,7 @@
                     <property name="auth_needed">0</property>
                     <property name="best_size"></property>
                     <property name="bg"></property>
-                    <property name="bitmap"></property>
+                    <property name="bitmap">Load From File; </property>
                     <property name="caption"></property>
                     <property name="caption_visible">1</property>
                     <property name="center_pane">0</property>
@@ -519,6 +519,75 @@
                 <property name="window_extra_style"></property>
                 <property name="window_name"></property>
                 <property name="window_style"></property>
+            </object>
+            <object class="wxMenuBar" expanded="1">
+                <property name="bg"></property>
+                <property name="context_help"></property>
+                <property name="context_menu">1</property>
+                <property name="enabled">1</property>
+                <property name="fg"></property>
+                <property name="font"></property>
+                <property name="hidden">0</property>
+                <property name="id">wxID_ANY</property>
+                <property name="maximum_size"></property>
+                <property name="minimum_size"></property>
+                <property name="name">m_menubar1</property>
+                <property name="permission">protected</property>
+                <property name="pos"></property>
+                <property name="size"></property>
+                <property name="style"></property>
+                <property name="subclass">; ; forward_declare</property>
+                <property name="tooltip"></property>
+                <property name="window_extra_style"></property>
+                <property name="window_name"></property>
+                <property name="window_style"></property>
+                <object class="wxMenu" expanded="1">
+                    <property name="label">File</property>
+                    <property name="name">FileMenu</property>
+                    <property name="permission">protected</property>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">ID_SAVE</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Save</property>
+                        <property name="name">SaveMenu</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">Ctrl-S</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">OnSave</event>
+                    </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">ID_OPEN</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Open</property>
+                        <property name="name">OpenMenu</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">Ctrl-O</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">OnOpen</event>
+                    </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">ID_EXPORT</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Export</property>
+                        <property name="name">ExportBtn</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">Ctrl-E</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">OnExport</event>
+                    </object>
+                </object>
             </object>
         </object>
     </object>

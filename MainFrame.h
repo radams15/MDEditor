@@ -25,6 +25,7 @@
 #include <wx/icon.h>
 #include <wx/toolbar.h>
 #include <wx/statusbr.h>
+#include <wx/menu.h>
 #include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -39,9 +40,19 @@ class MainFrame : public wxFrame
 
 		// Private event handlers
 		void _wxFB_OnRefreshBtn( wxCommandEvent& event ){ OnRefreshBtn( event ); }
+		void _wxFB_OnSave( wxCommandEvent& event ){ OnSave( event ); }
+		void _wxFB_OnOpen( wxCommandEvent& event ){ OnOpen( event ); }
+		void _wxFB_OnExport( wxCommandEvent& event ){ OnExport( event ); }
 
 
 	protected:
+		enum
+		{
+			ID_SAVE = 1000,
+			ID_OPEN,
+			ID_EXPORT
+		};
+
 		wxSplitterWindow* m_splitter1;
 		wxPanel* m_panel2;
 		wxStyledTextCtrl* MDEntry;
@@ -50,9 +61,14 @@ class MainFrame : public wxFrame
 		wxToolBar* m_toolBar1;
 		wxButton* m_button1;
 		wxStatusBar* m_statusBar1;
+		wxMenuBar* m_menubar1;
+		wxMenu* FileMenu;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void OnRefreshBtn( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSave( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:

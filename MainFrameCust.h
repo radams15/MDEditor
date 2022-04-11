@@ -12,9 +12,15 @@ private:
 
     void RefreshText();
 
+    wxString currentFile;
+
 protected:
 
     void OnRefreshBtn( wxCommandEvent& event );
+
+    void OnSave( wxCommandEvent& event );
+    void OnOpen( wxCommandEvent& event );
+    void OnExport( wxCommandEvent& event );
 
 public:
     MainFrameCust();
