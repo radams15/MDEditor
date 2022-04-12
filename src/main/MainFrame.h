@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b3)
+// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -17,7 +17,6 @@
 #include <wx/settings.h>
 #include <wx/string.h>
 #include <wx/splitter.h>
-#include <wx/button.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
@@ -52,7 +51,8 @@ class MainFrame : public wxFrame
 	protected:
 		enum
 		{
-			ID_SAVE = 1000,
+			ID_RELOAD = 1000,
+			ID_SAVE,
 			ID_OPEN,
 			ID_EXPORT,
 			ID_SETTINGS
@@ -64,7 +64,7 @@ class MainFrame : public wxFrame
 		wxPanel* DisplayPanel;
 		wxBoxSizer* DisplaySizer;
 		wxToolBar* m_toolBar1;
-		wxButton* m_button2;
+		wxToolBarToolBase* m_tool1;
 		wxStatusBar* StatusBar;
 		wxMenuBar* m_menubar1;
 		wxMenu* FileMenu;

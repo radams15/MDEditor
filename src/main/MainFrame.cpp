@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b3)
+// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -7,10 +7,12 @@
 
 #include "MainFrame.h"
 
+#include "../../res/reload.png.h"
+
 ///////////////////////////////////////////////////////////////////////////
 
 BEGIN_EVENT_TABLE( MainFrame, wxFrame )
-	EVT_BUTTON( wxID_ANY, MainFrame::_wxFB_OnRefreshBtn )
+	EVT_TOOL( ID_RELOAD, MainFrame::_wxFB_OnRefreshBtn )
 	EVT_MENU( ID_SAVE, MainFrame::_wxFB_OnSave )
 	EVT_MENU( ID_OPEN, MainFrame::_wxFB_OnOpen )
 	EVT_MENU( ID_EXPORT, MainFrame::_wxFB_OnExport )
@@ -47,9 +49,10 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	this->SetSizer( bSizer1 );
 	this->Layout();
-	m_toolBar1 = this->CreateToolBar( wxTB_HORIZONTAL, wxID_ANY );
-	m_button2 = new wxButton( m_toolBar1, wxID_ANY, wxT("Refresh"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_toolBar1->AddControl( m_button2 );
+	m_toolBar1 = this->CreateToolBar( wxTB_HORIZONTAL|wxTB_TEXT, wxID_ANY );
+	m_toolBar1->SetToolBitmapSize( wxSize( 32,32 ) );
+	m_tool1 = m_toolBar1->AddTool( ID_RELOAD, wxT("Reload"), reload_png_to_wx_bitmap(), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxT("Reloads the current render."), NULL );
+
 	m_toolBar1->Realize();
 
 	StatusBar = this->CreateStatusBar( 1, 0, wxID_ANY );

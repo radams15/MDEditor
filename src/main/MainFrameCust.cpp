@@ -11,6 +11,7 @@
 #include <wx/txtstrm.h>
 #include <wx/textfile.h>
 
+extern "C" void tweak(void* window);
 
 MainFrameCust::MainFrameCust() : MainFrame(NULL){
 #ifdef USE_WEBVIEW
@@ -64,6 +65,10 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
     textCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
 
     EntrySizer->Add( textCtrl, 1, wxEXPAND | wxALL, 5 );
+#endif
+
+#ifdef __APPLE__
+    tweak((void*) MacGetTopLevelWindowRef());
 #endif
 }
 

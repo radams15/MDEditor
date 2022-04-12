@@ -72,7 +72,7 @@ wxArrayString SettingsDlgCust::filesInDir(wxString dirs) {
     wxArrayString out;
 
     if ( !dir.IsOpened() ){
-        wxLogError("Cannot open directory: %s\n", dirs);
+        wxLogError("Cannot open directory: %s\n", dirs.mb_str());
         return out;
     }
 

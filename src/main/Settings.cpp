@@ -77,7 +77,5 @@ void Settings::save() {
 
     conf->SetPath("/View");
 
-    printf("Saved at: %s\n", (const char*) wxConfig::GetLocalFile("MDEditor").GetFullPath().mb_str());
-
     delete conf;
 }
