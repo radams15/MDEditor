@@ -17,7 +17,6 @@
 #include <wx/string.h>
 #include <wx/sizer.h>
 #include <wx/panel.h>
-#include <wx/html/htmlwin.h>
 #include <wx/splitter.h>
 #include <wx/button.h>
 #include <wx/bitmap.h>
@@ -27,6 +26,8 @@
 #include <wx/statusbr.h>
 #include <wx/menu.h>
 #include <wx/frame.h>
+#include <wx/notebook.h>
+#include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -43,6 +44,7 @@ class MainFrame : public wxFrame
 		void _wxFB_OnSave( wxCommandEvent& event ){ OnSave( event ); }
 		void _wxFB_OnOpen( wxCommandEvent& event ){ OnOpen( event ); }
 		void _wxFB_OnExport( wxCommandEvent& event ){ OnExport( event ); }
+		void _wxFB_OnOpenSettings( wxCommandEvent& event ){ OnOpenSettings( event ); }
 
 
 	protected:
@@ -50,25 +52,28 @@ class MainFrame : public wxFrame
 		{
 			ID_SAVE = 1000,
 			ID_OPEN,
-			ID_EXPORT
+			ID_EXPORT,
+			ID_SETTINGS
 		};
 
 		wxSplitterWindow* m_splitter1;
 		wxPanel* m_panel2;
 		wxStyledTextCtrl* MDEntry;
-		wxPanel* m_panel3;
-		wxHtmlWindow* DisplayView;
+		wxPanel* DisplayPanel;
+		wxBoxSizer* DisplaySizer;
 		wxToolBar* m_toolBar1;
 		wxButton* m_button1;
-		wxStatusBar* m_statusBar1;
+		wxStatusBar* StatusBar;
 		wxMenuBar* m_menubar1;
 		wxMenu* FileMenu;
+		wxMenu* EditMenu;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void OnRefreshBtn( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSave( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOpenSettings( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
@@ -82,6 +87,27 @@ class MainFrame : public wxFrame
 			m_splitter1->SetSashPosition( 0 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( MainFrame::m_splitter1OnIdle ), NULL, this );
 		}
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class SettingsDlg
+///////////////////////////////////////////////////////////////////////////////
+class SettingsDlg : public wxDialog
+{
+	private:
+
+	protected:
+		wxNotebook* SettingsNotebook;
+		wxPanel* EditorPanel;
+		wxPanel* DisplayPanel;
+		wxPanel* VewPanel;
+
+	public:
+
+		SettingsDlg( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP );
+
+		~SettingsDlg();
 
 };
 

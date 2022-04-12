@@ -14,6 +14,7 @@ BEGIN_EVENT_TABLE( MainFrame, wxFrame )
 	EVT_MENU( ID_SAVE, MainFrame::_wxFB_OnSave )
 	EVT_MENU( ID_OPEN, MainFrame::_wxFB_OnOpen )
 	EVT_MENU( ID_EXPORT, MainFrame::_wxFB_OnExport )
+	EVT_MENU( ID_SETTINGS, MainFrame::_wxFB_OnOpenSettings )
 END_EVENT_TABLE()
 
 MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
@@ -72,18 +73,14 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_panel2->SetSizer( bSizer5 );
 	m_panel2->Layout();
 	bSizer5->Fit( m_panel2 );
-	m_panel3 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* bSizer6;
-	bSizer6 = new wxBoxSizer( wxVERTICAL );
-
-	DisplayView = new wxHtmlWindow( m_panel3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHW_SCROLLBAR_AUTO );
-	bSizer6->Add( DisplayView, 1, wxALL|wxEXPAND, 5 );
+	DisplayPanel = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	DisplaySizer = new wxBoxSizer( wxVERTICAL );
 
 
-	m_panel3->SetSizer( bSizer6 );
-	m_panel3->Layout();
-	bSizer6->Fit( m_panel3 );
-	m_splitter1->SplitVertically( m_panel2, m_panel3, 0 );
+	DisplayPanel->SetSizer( DisplaySizer );
+	DisplayPanel->Layout();
+	DisplaySizer->Fit( DisplayPanel );
+	m_splitter1->SplitVertically( m_panel2, DisplayPanel, 0 );
 	bSizer1->Add( m_splitter1, 1, wxEXPAND, 5 );
 
 
@@ -96,7 +93,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_toolBar1->AddControl( m_button1 );
 	m_toolBar1->Realize();
 
-	m_statusBar1 = this->CreateStatusBar( 1, wxSTB_SIZEGRIP, wxID_ANY );
+	StatusBar = this->CreateStatusBar( 1, wxSTB_SIZEGRIP, wxID_ANY );
 	m_menubar1 = new wxMenuBar( 0 );
 	FileMenu = new wxMenu();
 	wxMenuItem* SaveMenu;
@@ -113,6 +110,13 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	m_menubar1->Append( FileMenu, wxT("File") );
 
+	EditMenu = new wxMenu();
+	wxMenuItem* SettingsBtn;
+	SettingsBtn = new wxMenuItem( EditMenu, ID_SETTINGS, wxString( wxT("Settings") ) , wxEmptyString, wxITEM_NORMAL );
+	EditMenu->Append( SettingsBtn );
+
+	m_menubar1->Append( EditMenu, wxT("Edit") );
+
 	this->SetMenuBar( m_menubar1 );
 
 
@@ -120,5 +124,35 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 }
 
 MainFrame::~MainFrame()
+{
+}
+
+SettingsDlg::SettingsDlg( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+	wxBoxSizer* bSizer4;
+	bSizer4 = new wxBoxSizer( wxVERTICAL );
+
+	bSizer4->SetMinSize( wxSize( 800,500 ) );
+	SettingsNotebook = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	EditorPanel = new wxPanel( SettingsNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	SettingsNotebook->AddPage( EditorPanel, wxT("Editor"), true );
+	DisplayPanel = new wxPanel( SettingsNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	SettingsNotebook->AddPage( DisplayPanel, wxT("Display"), false );
+	VewPanel = new wxPanel( SettingsNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	SettingsNotebook->AddPage( VewPanel, wxT("View"), false );
+
+	bSizer4->Add( SettingsNotebook, 1, wxEXPAND | wxALL, 5 );
+
+
+	this->SetSizer( bSizer4 );
+	this->Layout();
+	bSizer4->Fit( this );
+
+	this->Centre( wxBOTH );
+}
+
+SettingsDlg::~SettingsDlg()
 {
 }

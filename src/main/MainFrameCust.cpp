@@ -4,15 +4,22 @@
 
 #include "MainFrameCust.h"
 #include "Converter.h"
+#include "Settings.h"
 
 
 #include <wx/filedlg.h>
-#include <wx/log.h>
-#include <wx/wfstream.h>
 #include <wx/txtstrm.h>
+#include <wx/textfile.h>
+
 
 MainFrameCust::MainFrameCust() : MainFrame(NULL){
-
+#ifdef USE_WEBVIEW
+    webView = wxWebView::New(DisplayPanel, ID_DISPLAY);
+    DisplaySizer->Add(webView, 1, wxEXPAND, 5);
+#else
+    htmlView = new wxHtmlWindow(DisplayPanel, ID_DISPLAY);
+    DisplaySizer->Add(htmlView, 1, wxEXPAND, 5);
+#endif
 }
 
 void MainFrameCust::RefreshText() {
@@ -20,7 +27,11 @@ void MainFrameCust::RefreshText() {
 
     wxString html = Converter::md2html(text);
 
-    DisplayView->SetPage(html);
+#ifdef USE_WEBVIEW
+    webView->SetPage(html, "about::blank");
+#else
+    htmlView->SetPage(html);
+#endif
 }
 
 void MainFrameCust::OnRefreshBtn(wxCommandEvent &event) {
@@ -88,4 +99,23 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 
 void MainFrameCust::OnExport(wxCommandEvent &event) {
 
+}
+
+void MainFrameCust::OnOpenSettings(wxCommandEvent &event) {
+    SettingsDlg dlg(this);
+
+    /*if (dlg.ShowModal() == wxID_CANCEL) {
+        return;
+    }*/
+
+    dlg.ShowModal();
+
+    Settings* s = Settings::init();
+
+    s->save();
+
+    s->load();
+
+    //TODO refresh GUI
+    RefreshText();
 }

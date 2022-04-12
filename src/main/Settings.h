@@ -9,9 +9,9 @@
 #include <wx/string.h>
 
 enum MathsBackend {
-    KATEX,
-    MATHJAX,
-    NONE
+    NONE = 0,
+    KATEX = 1,
+    MATHJAX = 2,
 };
 
 class Settings {
@@ -20,10 +20,17 @@ protected:
     Settings();
 
 public: //TODO encapsulate by making private (getters & setters)
+
+    /* BEGIN EDITOR */
+
+    /* END EDITOR */
+
+
+    /* BEGIN DISPLAY */
     wxString cssDir;
     wxString highlightDir;
-
     wxString scidownCssFile;
+
     wxString cssTheme;
     wxString highlightTheme;
     wxString codeblockTheme;
@@ -34,8 +41,18 @@ public: //TODO encapsulate by making private (getters & setters)
 
     MathsBackend mathsBackend;
 
+    /* END DISPLAY */
+
+
+    /* BEGIN VIEW */
+
+    /* ENDVIEW */
+
 public:
     static Settings* init();
+
+    void load();
+    void save();
 };
 
 
