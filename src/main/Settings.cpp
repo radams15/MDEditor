@@ -5,14 +5,15 @@
 #include <wx/config.h>
 #include "Settings.h"
 
+#define DATA_DIR "/mnt/share/scripts/MDEditor/data"
+
 Settings::Settings() {
     doLineWrap = true;
 
     //TODO Don't hardcode for my machine
-    cssDir = "/mnt/share/scripts/MDEditor/data/css_styles";
-    codeBlockDir = "/mnt/share/scripts/MDEditor/data/highlight_styles";
-
-    scidownCssFile = "/mnt/share/scripts/MDEditor/data/scidown.css";
+    cssDir = DATA_DIR "/css_styles";
+    codeBlockDir = DATA_DIR "/highlight_styles";
+    scidownCssFile = DATA_DIR "/scidown.css";
 
     cssTheme = "swiss.css";
     codeBlockStyle = "default.css";

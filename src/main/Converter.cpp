@@ -6,6 +6,8 @@
 #include "Settings.h"
 
 #include <html.h>
+#include <wx/textfile.h>
+#include <wx/filename.h>
 
 scidown_render_flags renderMode(Settings* s){
     scidown_render_flags out = (scidown_render_flags) 0;
@@ -16,6 +18,32 @@ scidown_render_flags renderMode(Settings* s){
 
     if(s->useCharter){
         out = (scidown_render_flags) (out | (scidown_render_flags) SCIDOWN_RENDER_CHARTER);
+    }
+
+    return out;
+}
+
+wxString join(wxString a, wxString b){
+#if defined(WIN32)
+    return a + "\\" + b;
+#elif defined(__UNIX__)
+    return a + "/" + b;
+#else
+    return a + ":" + b;
+#endif
+}
+
+wxString getFileContent(wxString file){
+    wxString str;
+    wxString out;
+
+    wxTextFile tfile;
+    tfile.Open(file);
+
+    out += tfile.GetFirstLine() + "\n";
+
+    while(!tfile.Eof()){
+        out += tfile.GetNextLine() + "\n";
     }
 
     return out;
@@ -42,6 +70,11 @@ wxString header(Settings* s){
     if(s->useMermaid){
         buf += wxT("<script src=\"https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js\"></script>");
     }
+
+    buf += "<style>";
+    buf += getFileContent(join(s->cssDir, s->cssTheme));
+    buf += getFileContent(s->scidownCssFile);
+    buf += "</style>";
 
     return buf;
 }
