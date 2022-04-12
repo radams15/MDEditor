@@ -48,13 +48,11 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	this->SetSizer( bSizer1 );
 	this->Layout();
 	m_toolBar1 = this->CreateToolBar( wxTB_HORIZONTAL, wxID_ANY );
-	m_button1 = new wxButton( m_toolBar1, wxID_ANY, wxT("Refresh"), wxDefaultPosition, wxDefaultSize, 0 );
-
-	m_button1->SetBitmap( wxNullBitmap );
-	m_toolBar1->AddControl( m_button1 );
+	m_button2 = new wxButton( m_toolBar1, wxID_ANY, wxT("Refresh"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_toolBar1->AddControl( m_button2 );
 	m_toolBar1->Realize();
 
-	StatusBar = this->CreateStatusBar( 1, wxSTB_SIZEGRIP, wxID_ANY );
+	StatusBar = this->CreateStatusBar( 1, 0, wxID_ANY );
 	m_menubar1 = new wxMenuBar( 0 );
 	FileMenu = new wxMenu();
 	wxMenuItem* SaveMenu;

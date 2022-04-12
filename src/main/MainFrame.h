@@ -64,7 +64,7 @@ class MainFrame : public wxFrame
 		wxPanel* DisplayPanel;
 		wxBoxSizer* DisplaySizer;
 		wxToolBar* m_toolBar1;
-		wxButton* m_button1;
+		wxButton* m_button2;
 		wxStatusBar* StatusBar;
 		wxMenuBar* m_menubar1;
 		wxMenu* FileMenu;

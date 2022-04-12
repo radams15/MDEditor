@@ -19,15 +19,21 @@ void SettingsDlgCust::loadEditor() {
 
 }
 
+void setCombo(wxChoice* chc, wxArrayString data){
+    for(int i=0 ; i<data.Count() ; i++){
+        chc->Append(data.Item(i));
+    }
+}
+
 void SettingsDlgCust::loadDisplay() {
     CssCombo->Clear();
     wxArrayString cssFiles = filesInDir(settings->cssDir);
-    CssCombo->Set(cssFiles);
+    setCombo(CssCombo, cssFiles);
     CssCombo->SetSelection(cssFiles.Index(settings->cssTheme));
 
     CodeThemeCombo->Clear();
     wxArrayString codeThemes = filesInDir(settings->codeBlockDir);
-    CodeThemeCombo->Set(codeThemes);
+    setCombo(CodeThemeCombo, codeThemes);
     CodeThemeCombo->SetSelection(codeThemes.Index(settings->codeBlockStyle));
 
     MathsBackendCombo->SetSelection((int) settings->mathsBackend);

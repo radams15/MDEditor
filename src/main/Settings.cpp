@@ -5,7 +5,7 @@
 #include <wx/config.h>
 #include "Settings.h"
 
-#define DATA_DIR "/mnt/share/scripts/MDEditor/data"
+#define DATA_DIR "../data"
 
 Settings::Settings() {
     doLineWrap = true;
@@ -76,6 +76,8 @@ void Settings::save() {
     conf->Write("mathsBackend", (int) mathsBackend);
 
     conf->SetPath("/View");
+
+    printf("Saved at: %s\n", (const char*) wxConfig::GetLocalFile("MDEditor").GetFullPath().mb_str());
 
     delete conf;
 }

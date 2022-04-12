@@ -138,7 +138,7 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 
     currentFile = openFileDialog.GetPath();
 
-    SetLabel(wxString::Format("MD Editor: '%s'", currentFile));
+    SetLabel(wxString::Format("MD Editor: '%s'", currentFile.mb_str()));
 
     wxString str;
 

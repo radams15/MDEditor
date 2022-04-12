@@ -34,19 +34,24 @@ wxString join(wxString a, wxString b){
 }
 
 wxString getFileContent(wxString file){
-    wxString str;
-    wxString out;
+    if(wxFileExists(file)) {
+        wxString str;
+        wxString out;
 
-    wxTextFile tfile;
-    tfile.Open(file);
+        wxTextFile tfile;
+        tfile.Open(file);
 
-    out += tfile.GetFirstLine() + "\n";
+        out += tfile.GetFirstLine() + "\n";
 
-    while(!tfile.Eof()){
-        out += tfile.GetNextLine() + "\n";
+        while (!tfile.Eof()) {
+            out += tfile.GetNextLine() + "\n";
+        }
+
+        return out;
     }
 
-    return out;
+    wxLogError("Cannot open file '%s'\n", file.mb_str());
+    return "";
 }
 
 wxString header(Settings* s){
@@ -63,7 +68,7 @@ wxString header(Settings* s){
     if(s->doHighlight){
         wxString css = s->codeBlockStyle;
         css.Replace(".css", "");
-        buf += wxString::Format("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">", css);
+        buf += wxString::Format("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">", css.mb_str());
         buf += wxT("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js\"></script>");
     }
 
@@ -106,7 +111,7 @@ wxString Converter::md2html(wxString in){
 
     scidown_render_flags html_mode = renderMode(s);
 
-    localization local = {
+    localization_t local = {
             (char*) "Figure",
             (char*) "Listing",
             (char*) "Table"
