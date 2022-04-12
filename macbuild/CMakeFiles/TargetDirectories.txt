@@ -1,7 +1,0 @@
-/Volumes/server/scripts/MDEditor/macbuild/CMakeFiles/edit_cache.dir
-/Volumes/server/scripts/MDEditor/macbuild/CMakeFiles/rebuild_cache.dir
-/Volumes/server/scripts/MDEditor/macbuild/CMakeFiles/MDEditor.dir
-/Volumes/server/scripts/MDEditor/macbuild/lib/scidown/CMakeFiles/scidown.dir
-/Volumes/server/scripts/MDEditor/macbuild/lib/scidown/CMakeFiles/edit_cache.dir
-/Volumes/server/scripts/MDEditor/macbuild/lib/scidown/CMakeFiles/rebuild_cache.dir
-/Volumes/server/scripts/MDEditor/macbuild/lib/scidown/CMakeFiles/Scidown.dir
