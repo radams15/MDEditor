@@ -5,6 +5,7 @@
 #include "MainFrameCust.h"
 #include "Converter.h"
 #include "Settings.h"
+#include "SettingsDlgCust.h"
 
 
 #include <wx/filedlg.h>
@@ -20,6 +21,8 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
     htmlView = new wxHtmlWindow(DisplayPanel, ID_DISPLAY);
     DisplaySizer->Add(htmlView, 1, wxEXPAND, 5);
 #endif
+
+
 }
 
 void MainFrameCust::RefreshText() {
@@ -102,13 +105,11 @@ void MainFrameCust::OnExport(wxCommandEvent &event) {
 }
 
 void MainFrameCust::OnOpenSettings(wxCommandEvent &event) {
-    SettingsDlg dlg(this);
+    SettingsDlgCust dlg(this);
 
-    /*if (dlg.ShowModal() == wxID_CANCEL) {
+    if (dlg.ShowModal() == wxID_CANCEL) {
         return;
-    }*/
-
-    dlg.ShowModal();
+    }
 
     Settings* s = Settings::init();
 

@@ -26,6 +26,9 @@
 #include <wx/statusbr.h>
 #include <wx/menu.h>
 #include <wx/frame.h>
+#include <wx/checkbox.h>
+#include <wx/stattext.h>
+#include <wx/choice.h>
 #include <wx/notebook.h>
 #include <wx/dialog.h>
 
@@ -100,7 +103,17 @@ class SettingsDlg : public wxDialog
 	protected:
 		wxNotebook* SettingsNotebook;
 		wxPanel* EditorPanel;
+		wxCheckBox* LineWrapCheck;
 		wxPanel* DisplayPanel;
+		wxStaticText* m_staticText1;
+		wxChoice* CssCombo;
+		wxStaticText* m_staticText11;
+		wxChoice* CodeThemeCombo;
+		wxStaticText* m_staticText12;
+		wxChoice* MathsBackendCombo;
+		wxCheckBox* MermaidCheck;
+		wxCheckBox* CharterCheck;
+		wxCheckBox* HighlightCheck;
 		wxPanel* VewPanel;
 
 	public:

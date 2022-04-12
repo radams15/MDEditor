@@ -24,7 +24,7 @@ find_package(wxWidgets COMPONENTS core base adv stc ${DISP_COMP} REQUIRED)
 include(${wxWidgets_USE_FILE})
 include_directories(lib/scidown/src)
 
-add_executable(MDEditor src/main/main.cpp src/main/MainApp.cpp src/main/MainFrame.cpp src/main/MainFrameCust.cpp src/main/Converter.cpp src/main/Settings.cpp)
+add_executable(MDEditor src/main/main.cpp src/main/MainApp.cpp src/main/MainFrame.cpp src/main/MainFrameCust.cpp src/main/Converter.cpp src/main/Settings.cpp src/main/SettingsDlgCust.cpp)
 
 if(USE_WEBVIEW)
     target_compile_definitions(MDEditor PRIVATE USE_WEBVIEW)

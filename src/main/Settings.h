@@ -23,21 +23,22 @@ public: //TODO encapsulate by making private (getters & setters)
 
     /* BEGIN EDITOR */
 
+    bool doLineWrap;
+
     /* END EDITOR */
 
 
     /* BEGIN DISPLAY */
     wxString cssDir;
-    wxString highlightDir;
+    wxString codeBlockDir;
     wxString scidownCssFile;
 
     wxString cssTheme;
-    wxString highlightTheme;
-    wxString codeblockTheme;
+    wxString codeBlockStyle;
 
     bool useMermaid;
     bool useCharter;
-    bool useHighlight;
+    bool doHighlight;
 
     MathsBackend mathsBackend;
 

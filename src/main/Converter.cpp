@@ -32,8 +32,8 @@ wxString header(Settings* s){
         buf += wxT("<script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS_HTML\"></script>");
     }
 
-    if(s->useHighlight){
-        buf += wxString::Format("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">", s->highlightTheme);
+    if(s->doHighlight){
+        buf += wxString::Format("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">", s->codeBlockStyle);
         buf += wxT("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js\"></script>");
     }
 
@@ -51,7 +51,7 @@ wxString footer(Settings* s){
         buf += wxT("<script>renderMathInElement(document.body);</script>");
     }
 
-    if(s->useHighlight){
+    if(s->doHighlight){
         buf += wxT("<script>hljs.initHighlightingOnLoad();</script>");
     }
 

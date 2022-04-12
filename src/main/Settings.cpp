@@ -6,20 +6,24 @@
 #include "Settings.h"
 
 Settings::Settings() {
+    doLineWrap = true;
+
     //TODO Don't hardcode for my machine
     cssDir = "/mnt/share/scripts/MDEditor/data/css_styles";
-    highlightDir = "/mnt/share/scripts/MDEditor/data/highlight_styles";
+    codeBlockDir = "/mnt/share/scripts/MDEditor/data/highlight_styles";
 
     scidownCssFile = "/mnt/share/scripts/MDEditor/data/scidown.css";
 
     cssTheme = "swiss.css";
-    highlightTheme = "default.css";
+    codeBlockStyle = "default.css";
 
     useMermaid = true;
     useCharter = true;
-    useHighlight = true;
+    doHighlight = true;
 
     mathsBackend = KATEX;
+
+    load();
 }
 
 Settings* Settings::init() {
@@ -28,36 +32,49 @@ Settings* Settings::init() {
 }
 
 void Settings::load() {
+    wxConfig* conf = new wxConfig("MDEditor");
 
+    if(conf->Exists("/Editor")) {
+        conf->SetPath("/Editor");
+        conf->Read("doLineWrap", &doLineWrap);
+    }
+
+    if(conf->Exists("/Display")) {
+        conf->SetPath("/Display");
+
+        conf->Read("cssTheme", &cssTheme);
+        conf->Read("codeBlockStyle", &codeBlockStyle);
+
+        conf->Read("useMermaid", &useMermaid);
+        conf->Read("useCharter", &useCharter);
+        conf->Read("doHighlight", &doHighlight);
+        conf->Read("mathsBackend", (int *) &mathsBackend);
+    }
+
+    if(conf->Exists("/View")) {
+        conf->SetPath("/View");
+    }
+
+    delete conf;
 }
 
 void Settings::save() {
     wxConfig* conf = new wxConfig("MDEditor");
 
     conf->SetPath("/Editor");
-
-
+    conf->Write("doLineWrap", doLineWrap);
 
     conf->SetPath("/Display");
 
-    // These are really compile-time constants so don't save them
-    /*conf->Write("cssDir", cssDir);
-    conf->Write("highlightDir", highlightDir);
-    conf->Write("scidownCssFile", scidownCssFile);*/
-
     conf->Write("cssTheme", cssTheme);
-    conf->Write("highlightTheme", highlightTheme);
-    conf->Write("codeblockTheme", codeblockTheme);
+    conf->Write("codeBlockStyle", codeBlockStyle);
 
     conf->Write("useMermaid", useMermaid);
     conf->Write("useCharter", useCharter);
-    conf->Write("useHighlight", useHighlight);
+    conf->Write("doHighlight", doHighlight);
     conf->Write("mathsBackend", (int) mathsBackend);
 
-
     conf->SetPath("/View");
-
-    wxPrintf("%s\n", wxFileConfig::GetLocalFileName("MDEditor"));
 
     delete conf;
 }

@@ -137,9 +137,105 @@ SettingsDlg::SettingsDlg( wxWindow* parent, wxWindowID id, const wxString& title
 	bSizer4->SetMinSize( wxSize( 800,500 ) );
 	SettingsNotebook = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	EditorPanel = new wxPanel( SettingsNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	SettingsNotebook->AddPage( EditorPanel, wxT("Editor"), true );
+	wxBoxSizer* bSizer17;
+	bSizer17 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer18;
+	bSizer18 = new wxBoxSizer( wxVERTICAL );
+
+	LineWrapCheck = new wxCheckBox( EditorPanel, wxID_ANY, wxT("Line Wrapping"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer18->Add( LineWrapCheck, 0, wxALL, 5 );
+
+
+	bSizer17->Add( bSizer18, 1, wxEXPAND, 5 );
+
+
+	EditorPanel->SetSizer( bSizer17 );
+	EditorPanel->Layout();
+	bSizer17->Fit( EditorPanel );
+	SettingsNotebook->AddPage( EditorPanel, wxT("Editor"), false );
 	DisplayPanel = new wxPanel( SettingsNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	SettingsNotebook->AddPage( DisplayPanel, wxT("Display"), false );
+	wxBoxSizer* bSizer5;
+	bSizer5 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer6;
+	bSizer6 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticText1 = new wxStaticText( DisplayPanel, wxID_ANY, wxT("CSS Theme"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText1->Wrap( -1 );
+	bSizer6->Add( m_staticText1, 0, wxALL, 5 );
+
+	wxArrayString CssComboChoices;
+	CssCombo = new wxChoice( DisplayPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, CssComboChoices, 0 );
+	CssCombo->SetSelection( 0 );
+	bSizer6->Add( CssCombo, 0, wxALL, 5 );
+
+
+	bSizer5->Add( bSizer6, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer61;
+	bSizer61 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticText11 = new wxStaticText( DisplayPanel, wxID_ANY, wxT("Code Block Theme"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText11->Wrap( -1 );
+	bSizer61->Add( m_staticText11, 0, wxALL, 5 );
+
+	wxArrayString CodeThemeComboChoices;
+	CodeThemeCombo = new wxChoice( DisplayPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, CodeThemeComboChoices, 0 );
+	CodeThemeCombo->SetSelection( 0 );
+	bSizer61->Add( CodeThemeCombo, 0, wxALL, 5 );
+
+
+	bSizer5->Add( bSizer61, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer62;
+	bSizer62 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticText12 = new wxStaticText( DisplayPanel, wxID_ANY, wxT("Maths Interpreter"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText12->Wrap( -1 );
+	bSizer62->Add( m_staticText12, 0, wxALL, 5 );
+
+	wxString MathsBackendComboChoices[] = { wxT("None"), wxT("Katex"), wxT("MathJax") };
+	int MathsBackendComboNChoices = sizeof( MathsBackendComboChoices ) / sizeof( wxString );
+	MathsBackendCombo = new wxChoice( DisplayPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, MathsBackendComboNChoices, MathsBackendComboChoices, 0 );
+	MathsBackendCombo->SetSelection( 0 );
+	bSizer62->Add( MathsBackendCombo, 0, wxALL, 5 );
+
+
+	bSizer5->Add( bSizer62, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer12;
+	bSizer12 = new wxBoxSizer( wxVERTICAL );
+
+	MermaidCheck = new wxCheckBox( DisplayPanel, wxID_ANY, wxT("Use Mermaid"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer12->Add( MermaidCheck, 0, wxALL, 5 );
+
+
+	bSizer5->Add( bSizer12, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer13;
+	bSizer13 = new wxBoxSizer( wxVERTICAL );
+
+	CharterCheck = new wxCheckBox( DisplayPanel, wxID_ANY, wxT("Use Charter"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer13->Add( CharterCheck, 0, wxALL, 5 );
+
+
+	bSizer5->Add( bSizer13, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer16;
+	bSizer16 = new wxBoxSizer( wxVERTICAL );
+
+	HighlightCheck = new wxCheckBox( DisplayPanel, wxID_ANY, wxT("Do Code Highlighting"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer16->Add( HighlightCheck, 0, wxALL, 5 );
+
+
+	bSizer5->Add( bSizer16, 1, wxEXPAND, 5 );
+
+
+	DisplayPanel->SetSizer( bSizer5 );
+	DisplayPanel->Layout();
+	bSizer5->Fit( DisplayPanel );
+	SettingsNotebook->AddPage( DisplayPanel, wxT("Display"), true );
 	VewPanel = new wxPanel( SettingsNotebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	SettingsNotebook->AddPage( VewPanel, wxT("View"), false );
 
