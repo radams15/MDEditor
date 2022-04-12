@@ -1,4 +1,4 @@
-# MDEditor
+# MDEditor!
 
 ## Written in wxWidgets
 
@@ -9,3 +9,5 @@
 - To run on old hardware (target at least Windows XP and OSX Tiger)
 
 - To help me learn.
+
+

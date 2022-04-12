@@ -101,7 +101,25 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 }
 
 void MainFrameCust::OnExport(wxCommandEvent &event) {
+    wxFileDialog saveFileDialog(this, wxT("Export HTML File"), "", "", "HTML files (*.html)|*.html",wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
+    if (saveFileDialog.ShowModal() == wxID_CANCEL) {
+        return;
+    }
+
+    wxTextFile file( saveFileDialog.GetPath() );
+    file.Open();
+
+    file.Clear();
+
+    wxString text = MDEntry->GetText();
+
+    wxString html = Converter::md2html(text);
+
+    file.AddLine(html);
+
+    file.Write();
+    file.Close();
 }
 
 void MainFrameCust::OnOpenSettings(wxCommandEvent &event) {

@@ -33,7 +33,9 @@ wxString header(Settings* s){
     }
 
     if(s->doHighlight){
-        buf += wxString::Format("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">", s->codeBlockStyle);
+        wxString css = s->codeBlockStyle;
+        css.Replace(".css", "");
+        buf += wxString::Format("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">", css);
         buf += wxT("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js\"></script>");
     }
 
