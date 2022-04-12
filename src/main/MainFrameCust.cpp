@@ -7,7 +7,6 @@
 #include "Settings.h"
 #include "SettingsDlgCust.h"
 
-
 #include <wx/filedlg.h>
 #include <wx/txtstrm.h>
 #include <wx/textfile.h>
@@ -21,8 +20,6 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
     htmlView = new wxHtmlWindow(DisplayPanel, ID_DISPLAY);
     DisplaySizer->Add(htmlView, 1, wxEXPAND, 5);
 #endif
-
-
 }
 
 void MainFrameCust::RefreshText() {
@@ -35,6 +32,8 @@ void MainFrameCust::RefreshText() {
 #else
     htmlView->SetPage(html);
 #endif
+
+    loadEntrySettings();
 }
 
 void MainFrameCust::OnRefreshBtn(wxCommandEvent &event) {
@@ -135,6 +134,16 @@ void MainFrameCust::OnOpenSettings(wxCommandEvent &event) {
 
     s->load();
 
-    //TODO refresh GUI
     RefreshText();
+    loadEntrySettings();
+}
+
+void MainFrameCust::loadEntrySettings() {
+    Settings* s = Settings::init();
+
+    if(s->doLineWrap){
+        MDEntry->SetWrapMode(wxSTC_WRAP_WORD);
+    }else{
+        MDEntry->SetWrapMode(wxSTC_WRAP_NONE);
+    }
 }

@@ -24,6 +24,8 @@ private:
 
     wxString currentFile;
 
+    void loadEntrySettings();
+
 #ifdef USE_WEBVIEW
     wxWebView* webView;
 #else
