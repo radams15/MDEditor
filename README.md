@@ -6,9 +6,7 @@
 
 - To be fast and reliable.
 
-- To run on old hardware (target
-at least Windows XP and OSX
-Tiger)
+- To run on old hardware (target at least Windows XP and OSX Tiger)
 
 - To help me learn wxWidgets.
 
@@ -19,10 +17,8 @@ Tiger)
 #include <stdio.h>
 
 int main(int argc, char** argv){
-printf("Hello World!\n");
+printf(“Hello World!\n”);
 
 return EXIT_SUCCESS;
 }
 ```
-
-

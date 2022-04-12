@@ -54,8 +54,7 @@ class MainFrame : public wxFrame
 			ID_RELOAD = 1000,
 			ID_SAVE,
 			ID_OPEN,
-			ID_EXPORT,
-			ID_SETTINGS
+			ID_EXPORT
 		};
 
 		wxSplitterWindow* m_splitter1;

@@ -62,7 +62,7 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
 
     EntrySizer->Add( textCtrl, 1, wxEXPAND | wxALL, 5 );
 #else
-    textCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
+    textCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_RICH|wxTE_PROCESS_TAB|wxTE_PROCESS_ENTER);
 
     EntrySizer->Add( textCtrl, 1, wxEXPAND | wxALL, 5 );
 #endif
@@ -237,6 +237,13 @@ void MainFrameCust::loadEntrySettings() {
         MDEntry->SetWrapMode(wxSTC_WRAP_WORD);
     }else{
         MDEntry->SetWrapMode(wxSTC_WRAP_NONE);
+    }
+
+#else
+    if(s->doLineWrap) {
+        textCtrl->SetExtraStyle(wxTE_WORDWRAP);
+    } else {
+        textCtrl->SetExtraStyle(wxTE_DONTWRAP);
     }
 #endif
 }

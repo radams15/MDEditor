@@ -16,7 +16,7 @@ BEGIN_EVENT_TABLE( MainFrame, wxFrame )
 	EVT_MENU( ID_SAVE, MainFrame::_wxFB_OnSave )
 	EVT_MENU( ID_OPEN, MainFrame::_wxFB_OnOpen )
 	EVT_MENU( ID_EXPORT, MainFrame::_wxFB_OnExport )
-	EVT_MENU( ID_SETTINGS, MainFrame::_wxFB_OnOpenSettings )
+	EVT_MENU( wxID_PREFERENCES, MainFrame::_wxFB_OnOpenSettings )
 END_EVENT_TABLE()
 
 MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
@@ -74,7 +74,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	EditMenu = new wxMenu();
 	wxMenuItem* SettingsBtn;
-	SettingsBtn = new wxMenuItem( EditMenu, ID_SETTINGS, wxString( wxT("Settings") ) , wxEmptyString, wxITEM_NORMAL );
+	SettingsBtn = new wxMenuItem( EditMenu, wxID_PREFERENCES, wxString( wxT("Preferences") ) + wxT('\t') + wxT("Ctrl-,"), wxEmptyString, wxITEM_NORMAL );
 	EditMenu->Append( SettingsBtn );
 
 	m_menubar1->Append( EditMenu, wxT("Edit") );
