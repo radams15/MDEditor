@@ -9,14 +9,13 @@
 
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
-#include <wx/stc/stc.h>
+#include <wx/sizer.h>
 #include <wx/gdicmn.h>
+#include <wx/panel.h>
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
 #include <wx/string.h>
-#include <wx/sizer.h>
-#include <wx/panel.h>
 #include <wx/splitter.h>
 #include <wx/button.h>
 #include <wx/bitmap.h>
@@ -60,8 +59,8 @@ class MainFrame : public wxFrame
 		};
 
 		wxSplitterWindow* m_splitter1;
-		wxPanel* m_panel2;
-		wxStyledTextCtrl* MDEntry;
+		wxPanel* EntryPanel;
+		wxBoxSizer* EntrySizer;
 		wxPanel* DisplayPanel;
 		wxBoxSizer* DisplaySizer;
 		wxToolBar* m_toolBar1;

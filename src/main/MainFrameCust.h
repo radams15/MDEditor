@@ -9,8 +9,14 @@
 
 #ifdef USE_WEBVIEW
 #include <wx/webview.h>
+#include <wx/textctrl.h>
+
 #else
 #include <wx/wxhtml.h>
+#endif
+
+#ifdef USE_STYLED_CTRL
+#include <wx/stc/stc.h>
 #endif
 
 class MainFrameCust : public MainFrame{
@@ -30,6 +36,12 @@ private:
     wxWebView* webView;
 #else
     wxHtmlWindow* htmlView;
+#endif
+
+#ifdef USE_STYLED_CTRL
+    wxStyledTextCtrl* textCtrl;
+#else
+    wxTextCtrl* textCtrl;
 #endif
 
 protected:
