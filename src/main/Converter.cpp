@@ -7,7 +7,6 @@
 
 #include <html.h>
 #include <wx/textfile.h>
-#include <wx/filename.h>
 
 scidown_render_flags renderMode(Settings* s){
     scidown_render_flags out = (scidown_render_flags) 0;

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b)
+// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b3)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -17,6 +17,7 @@ BEGIN_EVENT_TABLE( MainFrame, wxFrame )
 	EVT_MENU( ID_OPEN, MainFrame::_wxFB_OnOpen )
 	EVT_MENU( ID_EXPORT, MainFrame::_wxFB_OnExport )
 	EVT_MENU( wxID_PREFERENCES, MainFrame::_wxFB_OnOpenSettings )
+	EVT_MENU( ID_RELOAD, MainFrame::_wxFB_OnRefreshBtn )
 END_EVENT_TABLE()
 
 MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
@@ -78,6 +79,13 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	EditMenu->Append( SettingsBtn );
 
 	m_menubar1->Append( EditMenu, wxT("Edit") );
+
+	ViewMenu = new wxMenu();
+	wxMenuItem* ReloadMenu;
+	ReloadMenu = new wxMenuItem( ViewMenu, ID_RELOAD, wxString( wxT("Reload") ) + wxT('\t') + wxT("Ctrl-R"), wxEmptyString, wxITEM_NORMAL );
+	ViewMenu->Append( ReloadMenu );
+
+	m_menubar1->Append( ViewMenu, wxT("View") );
 
 	this->SetMenuBar( m_menubar1 );
 

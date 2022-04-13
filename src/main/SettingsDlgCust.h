@@ -21,7 +21,7 @@ private:
     void saveDisplay();
     void saveView();
 
-    wxArrayString filesInDir(wxString dirs);
+    static wxArrayString filesInDir(wxString dirs);
 
 
 public:

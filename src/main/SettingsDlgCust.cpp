@@ -16,7 +16,7 @@ SettingsDlgCust::SettingsDlgCust(wxWindow* parent) : SettingsDlg(parent){
 }
 
 void SettingsDlgCust::loadEditor() {
-
+    LineWrapCheck->SetValue(settings->doLineWrap);
 }
 
 void setCombo(wxChoice* chc, wxArrayString data){
@@ -44,11 +44,11 @@ void SettingsDlgCust::loadDisplay() {
 }
 
 void SettingsDlgCust::loadView() {
-    LineWrapCheck->SetValue(settings->doLineWrap);
+
 }
 
 void SettingsDlgCust::saveEditor() {
-
+    settings->doLineWrap = LineWrapCheck->GetValue();
 }
 
 void SettingsDlgCust::saveDisplay() {
@@ -63,7 +63,7 @@ void SettingsDlgCust::saveDisplay() {
 }
 
 void SettingsDlgCust::saveView() {
-    settings->doLineWrap = LineWrapCheck->GetValue();
+
 }
 
 wxArrayString SettingsDlgCust::filesInDir(wxString dirs) {
@@ -72,7 +72,7 @@ wxArrayString SettingsDlgCust::filesInDir(wxString dirs) {
     wxArrayString out;
 
     if ( !dir.IsOpened() ){
-        wxLogError("Cannot open directory: %s\n", dirs.mb_str());
+        wxLogError(wxT("Cannot open directory: %s\n"), dirs.mb_str());
         return out;
     }
 

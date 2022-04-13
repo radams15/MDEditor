@@ -5,7 +5,9 @@
 #include <wx/config.h>
 #include "Settings.h"
 
+#ifndef DATA_DIR
 #define DATA_DIR "../data"
+#endif
 
 Settings::Settings() {
     doLineWrap = true;

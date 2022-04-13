@@ -96,7 +96,7 @@ void MainFrameCust::OnRefreshBtn(wxCommandEvent &event) {
 
 void MainFrameCust::OnSave(wxCommandEvent &event) {
     if(!currentFile) {
-        wxFileDialog saveFileDialog(this, wxT("Save Markdown File"), "", "", "Markdown files (*.md)|*.md",wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+        wxFileDialog saveFileDialog(this, wxT("Save Markdown File"), "", "", wxT("Markdown files (*.md)|*.md"),wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
 
         if (saveFileDialog.ShowModal() == wxID_CANCEL) {
             return;
@@ -135,7 +135,7 @@ void MainFrameCust::OnSave(wxCommandEvent &event) {
 void MainFrameCust::OnOpen(wxCommandEvent &event) {
     //TODO check if current document saved
 
-    wxFileDialog openFileDialog(this, wxT("Open Markdown File"), "", "", "Markdown files (*.md)|*.md", wxFD_OPEN|wxFD_FILE_MUST_EXIST);
+    wxFileDialog openFileDialog(this, wxT("Open Markdown File"), "", "", wxT("Markdown files (*.md)|*.md"), wxFD_OPEN|wxFD_FILE_MUST_EXIST);
 
     if (openFileDialog.ShowModal() == wxID_CANCEL) {
         return;
@@ -187,7 +187,7 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 }
 
 void MainFrameCust::OnExport(wxCommandEvent &event) {
-    wxFileDialog saveFileDialog(this, wxT("Export HTML File"), "", "", "HTML files (*.html)|*.html",wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    wxFileDialog saveFileDialog(this, wxT("Export HTML File"), "", "", wxT("HTML files (*.html)|*.html"),wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
     if (saveFileDialog.ShowModal() == wxID_CANCEL) {
         return;

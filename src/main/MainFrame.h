@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b)
+// C++ code generated with wxFormBuilder (version 3.10.1-0-g8feb16b3)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -68,6 +68,7 @@ class MainFrame : public wxFrame
 		wxMenuBar* m_menubar1;
 		wxMenu* FileMenu;
 		wxMenu* EditMenu;
+		wxMenu* ViewMenu;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void OnRefreshBtn( wxCommandEvent& event ) { event.Skip(); }

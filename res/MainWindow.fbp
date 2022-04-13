@@ -425,6 +425,25 @@
                         <event name="OnMenuSelection">OnOpenSettings</event>
                     </object>
                 </object>
+                <object class="wxMenu" expanded="1">
+                    <property name="label">View</property>
+                    <property name="name">ViewMenu</property>
+                    <property name="permission">protected</property>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">ID_RELOAD</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">Reload</property>
+                        <property name="name">ReloadMenu</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut">Ctrl-R</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">OnRefreshBtn</event>
+                    </object>
+                </object>
             </object>
         </object>
         <object class="Dialog" expanded="1">
