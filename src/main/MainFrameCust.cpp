@@ -234,9 +234,9 @@ void MainFrameCust::loadEntrySettings() {
 
 #if USE_STYLED_CTRL
     if(s->doLineWrap){
-        MDEntry->SetWrapMode(wxSTC_WRAP_WORD);
+        textCtrl->SetWrapMode(wxSTC_WRAP_WORD);
     }else{
-        MDEntry->SetWrapMode(wxSTC_WRAP_NONE);
+        textCtrl->SetWrapMode(wxSTC_WRAP_NONE);
     }
 
 #else
