@@ -32,6 +32,7 @@ public: //TODO encapsulate by making private (getters & setters)
     wxString cssDir;
     wxString codeBlockDir;
     wxString scidownCssFile;
+    wxString scriptDir;
 
     wxString cssTheme;
     wxString codeBlockStyle;

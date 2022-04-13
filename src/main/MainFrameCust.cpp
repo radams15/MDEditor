@@ -16,7 +16,7 @@ extern "C" void tweak(void* window);
 MainFrameCust::MainFrameCust() : MainFrame(NULL){
 #ifdef USE_WEBVIEW
     webView = wxWebView::New(DisplayPanel, ID_DISPLAY);
-    DisplaySizer->Add(webView, 1, wxEXPAND, 15);
+    DisplaySizer->Add(webView, 1, wxEXPAND, 5);
 #else
     htmlView = new wxHtmlWindow(DisplayPanel, ID_DISPLAY);
     DisplaySizer->Add(htmlView, 1, wxEXPAND, 5);

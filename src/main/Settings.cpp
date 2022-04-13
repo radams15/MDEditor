@@ -16,6 +16,7 @@ Settings::Settings() {
     cssDir = DATA_DIR "/css_styles";
     codeBlockDir = DATA_DIR "/highlight_styles";
     scidownCssFile = DATA_DIR "/scidown.css";
+    scriptDir = DATA_DIR "/scripts";
 
     cssTheme = "swiss.css";
     codeBlockStyle = "default.css";

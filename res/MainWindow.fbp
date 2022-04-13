@@ -8,8 +8,8 @@
         <property name="disconnect_mode">source_name</property>
         <property name="disconnect_php_events">0</property>
         <property name="disconnect_python_events">0</property>
-        <property name="embedded_files_path">.</property>
-        <property name="encoding">UTF-8</property>
+        <property name="embedded_files_path">../src/res/</property>
+        <property name="encoding">ANSI</property>
         <property name="event_generation">table</property>
         <property name="file">MainFrame</property>
         <property name="first_id">1000</property>
@@ -310,7 +310,7 @@
                     <property name="label">Reload</property>
                     <property name="name">m_tool1</property>
                     <property name="permission">protected</property>
-                    <property name="statusbar">Reloads the current render.</property>
+                    <property name="statusbar">Reloads the current render</property>
                     <property name="tooltip"></property>
                     <event name="OnToolClicked">OnRefreshBtn</event>
                 </object>
@@ -367,7 +367,7 @@
                         <property name="bitmap"></property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
-                        <property name="help"></property>
+                        <property name="help">Saves the current document</property>
                         <property name="id">ID_SAVE</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">Save</property>
@@ -381,7 +381,7 @@
                         <property name="bitmap"></property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
-                        <property name="help"></property>
+                        <property name="help">Opens an existing document</property>
                         <property name="id">ID_OPEN</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">Open</property>
@@ -395,7 +395,7 @@
                         <property name="bitmap"></property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
-                        <property name="help"></property>
+                        <property name="help">Exports the current document as HTML</property>
                         <property name="id">ID_EXPORT</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">Export</property>
@@ -414,7 +414,7 @@
                         <property name="bitmap"></property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
-                        <property name="help"></property>
+                        <property name="help">Edit program preferences</property>
                         <property name="id">wxID_PREFERENCES</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">Preferences</property>
@@ -433,7 +433,7 @@
                         <property name="bitmap"></property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
-                        <property name="help"></property>
+                        <property name="help">Reloads the current render</property>
                         <property name="id">ID_RELOAD</property>
                         <property name="kind">wxITEM_NORMAL</property>
                         <property name="label">Reload</property>

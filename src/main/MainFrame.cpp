@@ -7,7 +7,7 @@
 
 #include "MainFrame.h"
 
-#include "../../res/reload.png.h"
+#include "../res/reload.png.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -52,7 +52,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	this->Layout();
 	m_toolBar1 = this->CreateToolBar( wxTB_HORIZONTAL|wxTB_TEXT, wxID_ANY );
 	m_toolBar1->SetToolBitmapSize( wxSize( 32,32 ) );
-	m_tool1 = m_toolBar1->AddTool( ID_RELOAD, wxT("Reload"), reload_png_to_wx_bitmap(), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxT("Reloads the current render."), NULL );
+	m_tool1 = m_toolBar1->AddTool( ID_RELOAD, wxT("Reload"), reload_png_to_wx_bitmap(), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, wxT("Reloads the current render"), NULL );
 
 	m_toolBar1->Realize();
 
@@ -60,29 +60,29 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_menubar1 = new wxMenuBar( 0 );
 	FileMenu = new wxMenu();
 	wxMenuItem* SaveMenu;
-	SaveMenu = new wxMenuItem( FileMenu, ID_SAVE, wxString( wxT("Save") ) + wxT('\t') + wxT("Ctrl-S"), wxEmptyString, wxITEM_NORMAL );
+	SaveMenu = new wxMenuItem( FileMenu, ID_SAVE, wxString( wxT("Save") ) + wxT('\t') + wxT("Ctrl-S"), wxT("Saves the current document"), wxITEM_NORMAL );
 	FileMenu->Append( SaveMenu );
 
 	wxMenuItem* OpenMenu;
-	OpenMenu = new wxMenuItem( FileMenu, ID_OPEN, wxString( wxT("Open") ) + wxT('\t') + wxT("Ctrl-O"), wxEmptyString, wxITEM_NORMAL );
+	OpenMenu = new wxMenuItem( FileMenu, ID_OPEN, wxString( wxT("Open") ) + wxT('\t') + wxT("Ctrl-O"), wxT("Opens an existing document"), wxITEM_NORMAL );
 	FileMenu->Append( OpenMenu );
 
 	wxMenuItem* ExportBtn;
-	ExportBtn = new wxMenuItem( FileMenu, ID_EXPORT, wxString( wxT("Export") ) + wxT('\t') + wxT("Ctrl-E"), wxEmptyString, wxITEM_NORMAL );
+	ExportBtn = new wxMenuItem( FileMenu, ID_EXPORT, wxString( wxT("Export") ) + wxT('\t') + wxT("Ctrl-E"), wxT("Exports the current document as HTML"), wxITEM_NORMAL );
 	FileMenu->Append( ExportBtn );
 
 	m_menubar1->Append( FileMenu, wxT("File") );
 
 	EditMenu = new wxMenu();
 	wxMenuItem* SettingsBtn;
-	SettingsBtn = new wxMenuItem( EditMenu, wxID_PREFERENCES, wxString( wxT("Preferences") ) + wxT('\t') + wxT("Ctrl-,"), wxEmptyString, wxITEM_NORMAL );
+	SettingsBtn = new wxMenuItem( EditMenu, wxID_PREFERENCES, wxString( wxT("Preferences") ) + wxT('\t') + wxT("Ctrl-,"), wxT("Edit program preferences"), wxITEM_NORMAL );
 	EditMenu->Append( SettingsBtn );
 
 	m_menubar1->Append( EditMenu, wxT("Edit") );
 
 	ViewMenu = new wxMenu();
 	wxMenuItem* ReloadMenu;
-	ReloadMenu = new wxMenuItem( ViewMenu, ID_RELOAD, wxString( wxT("Reload") ) + wxT('\t') + wxT("Ctrl-R"), wxEmptyString, wxITEM_NORMAL );
+	ReloadMenu = new wxMenuItem( ViewMenu, ID_RELOAD, wxString( wxT("Reload") ) + wxT('\t') + wxT("Ctrl-R"), wxT("Reloads the current render"), wxITEM_NORMAL );
 	ViewMenu->Append( ReloadMenu );
 
 	m_menubar1->Append( ViewMenu, wxT("View") );

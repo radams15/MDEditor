@@ -33,28 +33,28 @@ wxString join(wxString a, wxString b){
 }
 
 wxString getFileContent(wxString file){
-    if(wxFileExists(file)) {
-        wxString str;
-        wxString out;
-
-        wxTextFile tfile;
-        tfile.Open(file);
-
-        out += tfile.GetFirstLine() + "\n";
-
-        while (!tfile.Eof()) {
-            out += tfile.GetNextLine() + "\n";
-        }
-
-        return out;
+    if(! wxFileExists(file)) {
+        wxLogError("Cannot open file '%s'\n", file.mb_str());
+        return "";
     }
 
-    wxLogError("Cannot open file '%s'\n", file.mb_str());
-    return "";
+    wxString str;
+    wxString out;
+
+    wxTextFile tfile;
+    tfile.Open(file);
+
+    out += tfile.GetFirstLine() + "\n";
+
+    while (!tfile.Eof()) {
+        out += tfile.GetNextLine() + "\n";
+    }
+
+    return out;
 }
 
 wxString header(Settings* s){
-    wxString buf;
+    wxString buf = "";
 
     if(s->mathsBackend == KATEX){
         buf += wxT("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css\" crossorigin=\"anonymous\">");
