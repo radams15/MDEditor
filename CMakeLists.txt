@@ -44,3 +44,7 @@ if(USE_STYLED_CTRL)
 endif()
 
 target_link_libraries(MDEditor scidown ${wxWidgets_LIBRARIES})
+
+install(TARGETS MDEditor DESTINATION bin)
+install(DIRECTORY data DESTINATION share/MDEditor)
+install(TARGETS scidown DESTINATION lib)
