@@ -3,7 +3,8 @@ project(MDEditor)
 
 set(CMAKE_PROJECT_VERSION 0.2.1)
 
-set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_EXE_LINKER_FLAGS -Wl,--allow-multiple-definition)
 
 option(USE_WEBVIEW "Use wxWebView instead of wxHTML (Allows css & Js)" OFF)
 option(USE_STYLED_CTRL "Use wxStyledTextCtrl instead of wxTextCtrl (Allows nicer look)" OFF)
