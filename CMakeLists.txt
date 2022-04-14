@@ -43,6 +43,10 @@ if(USE_STYLED_CTRL)
     target_compile_definitions(MDEditor PRIVATE USE_STYLED_CTRL)
 endif()
 
+if(UNIX AND NOT APPLE)
+    target_compile_definitions(MDEditor PRIVATE DATA_DIR="/usr/local/share/MDEditor/data/")
+endif()
+
 target_link_libraries(MDEditor scidown ${wxWidgets_LIBRARIES})
 
 install(TARGETS MDEditor DESTINATION bin)
