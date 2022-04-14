@@ -9,13 +9,13 @@ Settings::Settings() {
     doLineWrap = true;
 
     //TODO Don't hardcode for my machine
-    cssDir = GET_DATA("css_styles");
-    codeBlockDir = GET_DATA("highlight_styles");
-    scidownCssFile = GET_DATA("scidown.css");
-    scriptDir = GET_DATA("scripts");
+    cssDir = GET_DATA(wxT("css_styles"));
+    codeBlockDir = GET_DATA(wxT("highlight_styles"));
+    scidownCssFile = GET_DATA(wxT("scidown.css"));
+    scriptDir = GET_DATA(wxT("scripts"));
 
-    cssTheme = "swiss.css";
-    codeBlockStyle = "default.css";
+    cssTheme = wxT("swiss.css");
+    codeBlockStyle = wxT("default.css");
 
     useMermaid = true;
     useCharter = true;
@@ -32,49 +32,49 @@ Settings* Settings::init() {
 }
 
 void Settings::load() {
-    wxConfig* conf = new wxConfig("MDEditor");
+    wxConfig* conf = new wxConfig(wxT("MDEditor"));
 
-    if(conf->Exists("/Editor")) {
-        conf->SetPath("/Editor");
-        conf->Read("doLineWrap", &doLineWrap);
+    if(conf->Exists(wxT("/Editor"))) {
+        conf->SetPath(wxT("/Editor"));
+        conf->Read(wxT("doLineWrap"), &doLineWrap);
     }
 
-    if(conf->Exists("/Display")) {
-        conf->SetPath("/Display");
+    if(conf->Exists(wxT("/Display"))) {
+        conf->SetPath(wxT("/Display"));
 
-        conf->Read("cssTheme", &cssTheme);
-        conf->Read("codeBlockStyle", &codeBlockStyle);
+        conf->Read(wxT("cssTheme"), &cssTheme);
+        conf->Read(wxT("codeBlockStyle"), &codeBlockStyle);
 
-        conf->Read("useMermaid", &useMermaid);
-        conf->Read("useCharter", &useCharter);
-        conf->Read("doHighlight", &doHighlight);
-        conf->Read("mathsBackend", (int *) &mathsBackend);
+        conf->Read(wxT("useMermaid"), &useMermaid);
+        conf->Read(wxT("useCharter"), &useCharter);
+        conf->Read(wxT("doHighlight"), &doHighlight);
+        conf->Read(wxT("mathsBackend"), (int *) &mathsBackend);
     }
 
-    if(conf->Exists("/View")) {
-        conf->SetPath("/View");
+    if(conf->Exists(wxT("/View"))) {
+        conf->SetPath(wxT("/View"));
     }
 
     delete conf;
 }
 
 void Settings::save() {
-    wxConfig* conf = new wxConfig("MDEditor");
+    wxConfig* conf = new wxConfig(wxT("MDEditor"));
 
-    conf->SetPath("/Editor");
-    conf->Write("doLineWrap", doLineWrap);
+    conf->SetPath(wxT("/Editor"));
+    conf->Write(wxT("doLineWrap"), doLineWrap);
 
-    conf->SetPath("/Display");
+    conf->SetPath(wxT("/Display"));
 
-    conf->Write("cssTheme", cssTheme);
-    conf->Write("codeBlockStyle", codeBlockStyle);
+    conf->Write(wxT("cssTheme"), cssTheme);
+    conf->Write(wxT("codeBlockStyle"), codeBlockStyle);
 
-    conf->Write("useMermaid", useMermaid);
-    conf->Write("useCharter", useCharter);
-    conf->Write("doHighlight", doHighlight);
-    conf->Write("mathsBackend", (int) mathsBackend);
+    conf->Write(wxT("useMermaid"), useMermaid);
+    conf->Write(wxT("useCharter"), useCharter);
+    conf->Write(wxT("doHighlight"), doHighlight);
+    conf->Write(wxT("mathsBackend"), (int) mathsBackend);
 
-    conf->SetPath("/View");
+    conf->SetPath(wxT("/View"));
 
     delete conf;
 }

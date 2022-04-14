@@ -28,8 +28,8 @@ wxString join(wxString a, wxString b){
 
 wxString getFileContent(wxString file){
     if(! wxFileExists(file)) {
-        wxLogError("Cannot open file '%s'\n", file.mb_str());
-        return "";
+        wxLogError(wxT("Cannot open file '%s'\n"), file.mb_str());
+        return wxT("");
     }
 
     wxString str;
@@ -38,17 +38,17 @@ wxString getFileContent(wxString file){
     wxTextFile tfile;
     tfile.Open(file);
 
-    out += tfile.GetFirstLine() + "\n";
+    out += tfile.GetFirstLine() + wxT("\n");
 
     while (!tfile.Eof()) {
-        out += tfile.GetNextLine() + "\n";
+        out += tfile.GetNextLine() + wxT("\n");
     }
 
     return out;
 }
 
 wxString header(Settings* s){
-    wxString buf = "";
+    wxString buf = wxT("");
 
     if(s->mathsBackend == KATEX){
         buf += wxT("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css\" crossorigin=\"anonymous\">");
@@ -60,8 +60,8 @@ wxString header(Settings* s){
 
     if(s->doHighlight){
         wxString css = s->codeBlockStyle;
-        css.Replace(".css", "");
-        buf += wxString::Format("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">", css.mb_str());
+        css.Replace(wxT(".css"), wxT(""));
+        buf += wxString::Format(wxT("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/%s.min.css\">"), css.c_str());
         buf += wxT("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js\"></script>");
     }
 
@@ -69,10 +69,10 @@ wxString header(Settings* s){
         buf += wxT("<script src=\"https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js\"></script>");
     }
 
-    buf += "<style>";
+    buf += wxT("<style>");
     buf += getFileContent(join(s->cssDir, s->cssTheme));
     buf += getFileContent(s->scidownCssFile);
-    buf += "</style>";
+    buf += wxT("</style>");
 
     return buf;
 }
@@ -105,9 +105,9 @@ wxString Converter::md2html(wxString in){
     scidown_render_flags html_mode = renderMode(s);
 
     localization_t local = {
-            (char*) "Figure",
-            (char*) "Listing",
-            (char*) "Table"
+            (char*) wxT("Figure"),
+            (char*) wxT("Listing"),
+            (char*) wxT("Table")
     };
 
     renderer = hoedown_html_renderer_new(html_mode, 0, local);
@@ -130,7 +130,7 @@ wxString Converter::md2html(wxString in){
 
     const char* buf_cstr = hoedown_buffer_cstr(buffer);
 
-    wxString html = wxString::Format("%s",buf_cstr);
+    wxString html = wxString::FromUTF8(buf_cstr);
 
     free(def.extra_header);
     free(def.extra_closing);

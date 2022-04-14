@@ -37,8 +37,6 @@ endif()
 
 add_executable(MDEditor MACOSX_BUNDLE src/main/main.cpp src/main/MainApp.cpp src/main/MainFrame.cpp src/main/MainFrameCust.cpp src/main/Converter.cpp src/main/Settings.cpp src/main/SettingsDlgCust.cpp ${EXTRAS})
 
-
-
 if(USE_WEBVIEW)
     target_compile_definitions(MDEditor PRIVATE USE_WEBVIEW)
 endif()
@@ -49,6 +47,11 @@ endif()
 
 if(UNIX AND NOT APPLE)
     target_compile_definitions(MDEditor PRIVATE DATA_DIR="/usr/local/share/MDEditor/data/")
+endif()
+
+if(WIN32)
+    add_custom_command(TARGET MDEditor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/res/MDEditor.exe.manifest ${CMAKE_BINARY_DIR})
+    add_custom_command(TARGET MDEditor POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/lib/scidown/libscidown.dll ${CMAKE_BINARY_DIR})
 endif()
 
 if(APPLE)

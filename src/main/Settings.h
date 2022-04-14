@@ -9,15 +9,15 @@
 #include <wx/string.h>
 
 #if defined(WIN32)
-#define SEP "\\"
+#define SEP wxT("\\")
 #elif defined(__UNIX__)
-#define SEP "/"
+#define SEP wxT("/")
 #else
-#define SEP ":"
+#define SEP wxT(":")
 #endif
 
 #ifndef DATA_DIR
-#define DATA_DIR "../data"
+#define DATA_DIR wxT("../data")
 #endif
 
 #ifndef __APPLE__
@@ -25,7 +25,7 @@
 #else
 extern "C" const char* getResourcePath(const char* file);
 
-#define GET_DATA(f) wxString::FromUTF8(getResourcePath(f))
+#define GET_DATA(f) wxString::FromUTF8(getResourcePath((const char*) (f)))
 #endif
 
 enum MathsBackend {

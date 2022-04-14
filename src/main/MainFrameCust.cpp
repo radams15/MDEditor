@@ -14,6 +14,8 @@
 extern "C" void tweak(void* window);
 
 MainFrameCust::MainFrameCust() : MainFrame(NULL){
+    SetThemeEnabled(true);
+
 #ifdef USE_WEBVIEW
     webView = wxWebView::New(DisplayPanel, ID_DISPLAY);
     DisplaySizer->Add(webView, 1, wxEXPAND, 5);
@@ -62,8 +64,8 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
 
     EntrySizer->Add( textCtrl, 1, wxEXPAND | wxALL, 5 );
 #else
-    textCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_RICH|wxTE_PROCESS_TAB|wxTE_PROCESS_ENTER);
-
+    textCtrl = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxTE_RICH2|wxTE_PROCESS_TAB|wxTE_PROCESS_ENTER);
+    textCtrl->SetEditable(true);
     EntrySizer->Add( textCtrl, 1, wxEXPAND | wxALL, 5 );
 #endif
 
@@ -82,7 +84,7 @@ void MainFrameCust::RefreshText() {
     wxString html = Converter::md2html(text);
 
 #ifdef USE_WEBVIEW
-    webView->SetPage(html, "about::blank");
+    webView->SetPage(html, wxT("about::blank"));
 #else
     htmlView->SetPage(html);
 #endif
@@ -96,7 +98,7 @@ void MainFrameCust::OnRefreshBtn(wxCommandEvent &event) {
 
 void MainFrameCust::OnSave(wxCommandEvent &event) {
     if(!currentFile) {
-        wxFileDialog saveFileDialog(this, wxT("Save Markdown File"), "", "", wxT("Markdown files (*.md)|*.md"),wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
+        wxFileDialog saveFileDialog(this, wxT("Save Markdown File"), wxT(""), wxT(""), wxT("Markdown files (*.md)|*.md"),wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
 
         if (saveFileDialog.ShowModal() == wxID_CANCEL) {
             return;
@@ -135,7 +137,7 @@ void MainFrameCust::OnSave(wxCommandEvent &event) {
 void MainFrameCust::OnOpen(wxCommandEvent &event) {
     //TODO check if current document saved
 
-    wxFileDialog openFileDialog(this, wxT("Open Markdown File"), "", "", wxT("Markdown files (*.md)|*.md"), wxFD_OPEN|wxFD_FILE_MUST_EXIST);
+    wxFileDialog openFileDialog(this, wxT("Open Markdown File"), wxT(""), wxT(""), wxT("Markdown files (*.md)|*.md"), wxFD_OPEN|wxFD_FILE_MUST_EXIST);
 
     if (openFileDialog.ShowModal() == wxID_CANCEL) {
         return;
@@ -143,7 +145,7 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 
     currentFile = openFileDialog.GetPath();
 
-    SetLabel(wxString::Format("MD Editor: '%s'", currentFile.mb_str()));
+    SetLabel(wxString::Format(wxT("MD Editor: '%s'"), currentFile.mb_str()));
 
     wxString str;
 
@@ -160,11 +162,11 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 #else
     textCtrl->AppendText(str);
 #if defined(WIN32)
-    textCtrl->AppendText("\r\n");
+    textCtrl->AppendText(wxT("\r\n"));
 #elif defined(__UNIX__)
-    textCtrl->AppendText("\n");
+    textCtrl->AppendText(wxT("\n"));
 #else
-    textCtrl->AppendText("\r");
+    textCtrl->AppendText(wxT("\r"));
 #endif
 #endif
 
@@ -176,18 +178,18 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 #else
         textCtrl->AppendText(str);
 #if defined(WIN32)
-        textCtrl->AppendText("\r\n");
+        textCtrl->AppendText(wxT("\r\n"));
 #elif defined(__UNIX__)
-        textCtrl->AppendText("\n");
+        textCtrl->AppendText(wxT("\n"));
 #else
-        textCtrl->AppendText("\r");
+        textCtrl->AppendText(wxT("\r"));
 #endif
 #endif
     }
 }
 
 void MainFrameCust::OnExport(wxCommandEvent &event) {
-    wxFileDialog saveFileDialog(this, wxT("Export HTML File"), "", "", wxT("HTML files (*.html)|*.html"),wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+    wxFileDialog saveFileDialog(this, wxT("Export HTML File"), wxT(""), wxT(""), wxT("HTML files (*.html)|*.html"),wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
     if (saveFileDialog.ShowModal() == wxID_CANCEL) {
         return;
