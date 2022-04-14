@@ -5,18 +5,14 @@
 #include <wx/config.h>
 #include "Settings.h"
 
-#ifndef DATA_DIR
-#define DATA_DIR "../data"
-#endif
-
 Settings::Settings() {
     doLineWrap = true;
 
     //TODO Don't hardcode for my machine
-    cssDir = DATA_DIR "/css_styles";
-    codeBlockDir = DATA_DIR "/highlight_styles";
-    scidownCssFile = DATA_DIR "/scidown.css";
-    scriptDir = DATA_DIR "/scripts";
+    cssDir = GET_DATA("css_styles");
+    codeBlockDir = GET_DATA("highlight_styles");
+    scidownCssFile = GET_DATA("scidown.css");
+    scriptDir = GET_DATA("scripts");
 
     cssTheme = "swiss.css";
     codeBlockStyle = "default.css";

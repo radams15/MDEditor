@@ -8,6 +8,26 @@
 
 #include <wx/string.h>
 
+#if defined(WIN32)
+#define SEP "\\"
+#elif defined(__UNIX__)
+#define SEP "/"
+#else
+#define SEP ":"
+#endif
+
+#ifndef DATA_DIR
+#define DATA_DIR "../data"
+#endif
+
+#ifndef __APPLE__
+#define GET_DATA(f) DATA_DIR SEP f
+#else
+extern "C" const char* getResourcePath(const char* file);
+
+#define GET_DATA(f) wxString::FromUTF8(getResourcePath(f))
+#endif
+
 enum MathsBackend {
     NONE = 0,
     KATEX = 1,

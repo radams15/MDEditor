@@ -23,13 +23,7 @@ scidown_render_flags renderMode(Settings* s){
 }
 
 wxString join(wxString a, wxString b){
-#if defined(WIN32)
-    return a + "\\" + b;
-#elif defined(__UNIX__)
-    return a + "/" + b;
-#else
-    return a + ":" + b;
-#endif
+    return a + SEP + b;
 }
 
 wxString getFileContent(wxString file){

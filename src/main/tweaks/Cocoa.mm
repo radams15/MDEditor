@@ -4,7 +4,7 @@
 extern "C" void tweak(void* window){
 #ifdef MAC_OS_X_VERSION_10_10
 
-    auto* win = (NSWindow*) window;
+    NSWindow* win = (NSWindow*) window;
 
 #if USE_HEADERBAR
     win.titleVisibility = NSWindowTitleHidden;
@@ -17,4 +17,19 @@ extern "C" void tweak(void* window){
         toolbar.showsBaselineSeparator = false;
     }
 #endif
+}
+
+extern "C" const char* getResourcePath(const char* file){
+    NSBundle* bundle = [NSBundle mainBundle];
+
+    NSString* nsFile = [NSString stringWithUTF8String:(file)];
+
+    NSString* fileName = [[nsFile lastPathComponent] stringByDeletingPathExtension];
+    NSString* extension = [nsFile pathExtension];
+
+    NSString* path = [bundle pathForResource:fileName ofType:extension];
+
+    //NSLog(@"Path: %@\n", path);
+
+    return [path UTF8String];
 }

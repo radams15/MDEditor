@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 project(MDEditor)
 
+set(CMAKE_PROJECT_VERSION 0.2.1)
+
 set(CMAKE_CXX_STANDARD 98)
 
 option(USE_WEBVIEW "Use wxWebView instead of wxHTML (Allows css & Js)" OFF)
@@ -35,6 +37,8 @@ endif()
 
 add_executable(MDEditor MACOSX_BUNDLE src/main/main.cpp src/main/MainApp.cpp src/main/MainFrame.cpp src/main/MainFrameCust.cpp src/main/Converter.cpp src/main/Settings.cpp src/main/SettingsDlgCust.cpp ${EXTRAS})
 
+
+
 if(USE_WEBVIEW)
     target_compile_definitions(MDEditor PRIVATE USE_WEBVIEW)
 endif()
@@ -47,8 +51,29 @@ if(UNIX AND NOT APPLE)
     target_compile_definitions(MDEditor PRIVATE DATA_DIR="/usr/local/share/MDEditor/data/")
 endif()
 
+if(APPLE)
+    add_custom_command(TARGET MDEditor PRE_BUILD
+            COMMAND mkdir -p ${CMAKE_BINARY_DIR}/MDEditor.app/Contents/Resources/
+            COMMAND sh -c "cp -r ${CMAKE_CURRENT_SOURCE_DIR}/data/* ${CMAKE_BINARY_DIR}/MDEditor.app/Contents/Resources/"
+            VERBATIM)
+
+    add_custom_command(TARGET MDEditor POST_BUILD
+            COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/complete.sh
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            VERBATIM)
+
+    set_target_properties(MDEditor PROPERTIES
+            BUNDLE True
+            MACOSX_BUNDLE_GUI_IDENTIFIER uk.co.therhys.MDEditor
+            MACOSX_BUNDLE_BUNDLE_NAME MDEditor
+            MACOSX_BUNDLE_BUNDLE_VERSION "${CMAKE_PROJECT_VERSION}"
+            MACOSX_BUNDLE_SHORT_VERSION_STRING "${CMAKE_PROJECT_VERSION}"
+            MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/res/Info.plist
+            MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/res/MDEditor.icns"
+            )
+endif()
+
 target_link_libraries(MDEditor scidown ${wxWidgets_LIBRARIES})
 
 install(TARGETS MDEditor DESTINATION bin)
 install(DIRECTORY data DESTINATION share/MDEditor)
-install(TARGETS scidown DESTINATION lib)
