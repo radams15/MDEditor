@@ -14,21 +14,11 @@
 
 extern "C" void tweak(void* window);
 
-MainFrameCust::MainFrameCust() : MainFrame(NULL){
-    SetThemeEnabled(true);
-
-#ifdef USE_WEBVIEW
-    webView = wxWebView::New(DisplayPanel, ID_DISPLAY);
-    DisplaySizer->Add(webView, 1, wxEXPAND, 5);
-#else
-    htmlView = new wxHtmlWindow(DisplayPanel, ID_DISPLAY);
-    DisplaySizer->Add(htmlView, 1, wxEXPAND, 5);
-#endif
-
 #ifdef USE_STYLED_CTRL
-    textCtrl = new wxStyledTextCtrl( EntryPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxEmptyString );
+void loadStyleTheme(wxStyledTextCtrl* textCtrl){
+    Settings* s = Settings::init();
 
-    StyledTextTheme theme("cobalt");
+    StyledTextTheme theme(s->editorStyle);
 
     textCtrl->SetLexer(wxSTC_LEX_MARKDOWN);
 
@@ -47,6 +37,25 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
     textCtrl->StyleSetBackground(1, theme.background_colour); // Newline bg
     textCtrl->StyleSetBackground(wxSTC_STYLE_DEFAULT, theme.background_colour); // No-text bg
     textCtrl->StyleSetForeground(0, theme.foreground_colour);
+
+    textCtrl->SetSelBackground( true, theme.highlight_colour );
+    textCtrl->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
+}
+#endif
+
+MainFrameCust::MainFrameCust() : MainFrame(NULL){
+    SetThemeEnabled(true);
+
+#ifdef USE_WEBVIEW
+    webView = wxWebView::New(DisplayPanel, ID_DISPLAY);
+    DisplaySizer->Add(webView, 1, wxEXPAND, 5);
+#else
+    htmlView = new wxHtmlWindow(DisplayPanel, ID_DISPLAY);
+    DisplaySizer->Add(htmlView, 1, wxEXPAND, 5);
+#endif
+
+#ifdef USE_STYLED_CTRL
+    textCtrl = new wxStyledTextCtrl( EntryPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxEmptyString );
 
     textCtrl->SetUseTabs( true );
     textCtrl->SetTabWidth( 4 );
@@ -67,8 +76,7 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
     textCtrl->SetMarginType( 0, wxSTC_MARGIN_NUMBER );
     textCtrl->SetMarginWidth( 0, textCtrl->TextWidth( wxSTC_STYLE_LINENUMBER, wxT("000") ) );
 
-    textCtrl->SetSelBackground( true, theme.highlight_colour );
-    textCtrl->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
+    loadStyleTheme(textCtrl);
 
     EntrySizer->Add( textCtrl, 1, wxEXPAND | wxALL, 5 );
 #else

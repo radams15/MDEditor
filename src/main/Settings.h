@@ -53,10 +53,11 @@ public: //TODO encapsulate by making private (getters & setters)
     wxString codeBlockDir;
     wxString scidownCssFile;
     wxString scriptDir;
-    wxString themeDir;
+    wxString editorStyleDir;
 
     wxString cssTheme;
     wxString codeBlockStyle;
+    wxString editorStyle;
 
     bool useMermaid;
     bool useCharter;

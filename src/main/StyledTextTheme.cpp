@@ -27,8 +27,6 @@ bool SplitToken(const wxString& input, const wxChar& sep, wxString& rLeft, wxStr
 wxColour toColour(wxString in){
     wxString rs,gs,bs,tmp;
 
-    wxPrintf("Colour: %s\n", in);
-
     long r,g,b;
 
     SplitToken(in, ',', rs, tmp);
@@ -44,7 +42,7 @@ wxColour toColour(wxString in){
 StyledTextTheme::StyledTextTheme(wxString file) {
     Settings* s = Settings::init();
 
-    path = s->themeDir + SEP + file + ".theme";
+    path = s->editorStyleDir + SEP + file + ".theme";
 
     load();
 }

@@ -13,10 +13,11 @@ Settings::Settings() {
     codeBlockDir = GET_DATA(wxT("highlight_styles"));
     scidownCssFile = GET_DATA(wxT("scidown.css"));
     scriptDir = GET_DATA(wxT("scripts"));
-    themeDir = GET_DATA(wxT("themes"));
+    editorStyleDir = GET_DATA(wxT("themes"));
 
     cssTheme = wxT("swiss.css");
     codeBlockStyle = wxT("default.css");
+    editorStyle = wxT("cobalt");
 
     useMermaid = true;
     useCharter = true;
@@ -38,6 +39,7 @@ void Settings::load() {
     if(conf->Exists(wxT("/Editor"))) {
         conf->SetPath(wxT("/Editor"));
         conf->Read(wxT("doLineWrap"), &doLineWrap);
+        conf->Read(wxT("editorStyle"), &editorStyle);
     }
 
     if(conf->Exists(wxT("/Display"))) {
@@ -45,6 +47,7 @@ void Settings::load() {
 
         conf->Read(wxT("cssTheme"), &cssTheme);
         conf->Read(wxT("codeBlockStyle"), &codeBlockStyle);
+        conf->Read(wxT("editorStyle"), &editorStyle);
 
         conf->Read(wxT("useMermaid"), &useMermaid);
         conf->Read(wxT("useCharter"), &useCharter);
@@ -64,6 +67,7 @@ void Settings::save() {
 
     conf->SetPath(wxT("/Editor"));
     conf->Write(wxT("doLineWrap"), doLineWrap);
+    conf->Write(wxT("editorStyle"), editorStyle);
 
     conf->SetPath(wxT("/Display"));
 

@@ -119,6 +119,21 @@ SettingsDlg::SettingsDlg( wxWindow* parent, wxWindowID id, const wxString& title
 
 	bSizer17->Add( bSizer18, 1, wxEXPAND, 5 );
 
+	wxBoxSizer* bSizer63;
+	bSizer63 = new wxBoxSizer( wxHORIZONTAL );
+
+	m_staticText13 = new wxStaticText( EditorPanel, wxID_ANY, wxT("Highlight Style"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText13->Wrap( -1 );
+	bSizer63->Add( m_staticText13, 0, wxALL, 5 );
+
+	wxArrayString StyleComboChoices;
+	StyleCombo = new wxChoice( EditorPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, StyleComboChoices, 0 );
+	StyleCombo->SetSelection( 0 );
+	bSizer63->Add( StyleCombo, 0, wxALL, 5 );
+
+
+	bSizer17->Add( bSizer63, 1, wxEXPAND, 5 );
+
 
 	EditorPanel->SetSizer( bSizer17 );
 	EditorPanel->Layout();

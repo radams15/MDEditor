@@ -103,6 +103,8 @@ class SettingsDlg : public wxDialog
 		wxNotebook* SettingsNotebook;
 		wxPanel* EditorPanel;
 		wxCheckBox* LineWrapCheck;
+		wxStaticText* m_staticText13;
+		wxChoice* StyleCombo;
 		wxPanel* DisplayPanel;
 		wxStaticText* m_staticText1;
 		wxChoice* CssCombo;

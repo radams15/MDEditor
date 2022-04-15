@@ -7,6 +7,12 @@
 #include <wx/dir.h>
 #include <wx/log.h>
 
+void setCombo(wxChoice* chc, wxArrayString data){
+    for(int i=0 ; i<data.Count() ; i++){
+        chc->Append(data.Item(i));
+    }
+}
+
 SettingsDlgCust::SettingsDlgCust(wxWindow* parent) : SettingsDlg(parent){
     settings = Settings::init();
 
@@ -17,12 +23,12 @@ SettingsDlgCust::SettingsDlgCust(wxWindow* parent) : SettingsDlg(parent){
 
 void SettingsDlgCust::loadEditor() {
     LineWrapCheck->SetValue(settings->doLineWrap);
-}
 
-void setCombo(wxChoice* chc, wxArrayString data){
-    for(int i=0 ; i<data.Count() ; i++){
-        chc->Append(data.Item(i));
-    }
+    StyleCombo->Clear();
+    wxArrayString styleThemes = filesInDir(settings->editorStyleDir);
+    for(int i=0 ; i<styleThemes.Count() ; i++){styleThemes.Item(i).Replace(".theme","");}
+    setCombo(StyleCombo, styleThemes);
+    StyleCombo->SetSelection(styleThemes.Index(settings->editorStyle));
 }
 
 void SettingsDlgCust::loadDisplay() {
@@ -49,6 +55,7 @@ void SettingsDlgCust::loadView() {
 
 void SettingsDlgCust::saveEditor() {
     settings->doLineWrap = LineWrapCheck->GetValue();
+    settings->editorStyle = StyleCombo->GetStringSelection();
 }
 
 void SettingsDlgCust::saveDisplay() {
