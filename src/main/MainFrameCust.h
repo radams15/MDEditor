@@ -53,8 +53,12 @@ protected:
     void OnExport( wxCommandEvent& event );
     void OnOpenSettings( wxCommandEvent& event );
 
+    void OpenFile(wxString file);
+
 public:
     MainFrameCust();
+
+    void OpenFiles(wxArrayString files);
 };
 
 
