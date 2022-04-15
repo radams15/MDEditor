@@ -1,0 +1,6 @@
+[Theme]
+background_colour=46,52,54
+foreground_colour=238,238,236
+header_colour=138,226,52
+highlight_colour=160,160,164
+code_block_colour=114,159,207

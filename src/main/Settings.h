@@ -9,19 +9,19 @@
 #include <wx/string.h>
 
 #if defined(WIN32)
-#define SEP wxT("\\")
+#define SEP "\\"
 #elif defined(__UNIX__)
-#define SEP wxT("/")
+#define SEP "/"
 #else
-#define SEP wxT(":")
+#define SEP ":"
 #endif
 
 #ifndef DATA_DIR
-#define DATA_DIR wxT("../data")
+#define DATA_DIR "../data"
 #endif
 
 #ifndef __APPLE__
-#define GET_DATA(f) DATA_DIR SEP f
+#define GET_DATA(f) wxT(DATA_DIR) wxT(SEP) f
 #else
 extern "C" const char* getResourcePath(const char* file);
 
@@ -53,6 +53,7 @@ public: //TODO encapsulate by making private (getters & setters)
     wxString codeBlockDir;
     wxString scidownCssFile;
     wxString scriptDir;
+    wxString themeDir;
 
     wxString cssTheme;
     wxString codeBlockStyle;

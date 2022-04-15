@@ -13,6 +13,7 @@ Settings::Settings() {
     codeBlockDir = GET_DATA(wxT("highlight_styles"));
     scidownCssFile = GET_DATA(wxT("scidown.css"));
     scriptDir = GET_DATA(wxT("scripts"));
+    themeDir = GET_DATA(wxT("themes"));
 
     cssTheme = wxT("swiss.css");
     codeBlockStyle = wxT("default.css");

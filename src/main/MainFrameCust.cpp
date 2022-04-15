@@ -6,6 +6,7 @@
 #include "Converter.h"
 #include "Settings.h"
 #include "SettingsDlgCust.h"
+#include "StyledTextTheme.h"
 
 #include <wx/filedlg.h>
 #include <wx/txtstrm.h>
@@ -26,6 +27,27 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
 
 #ifdef USE_STYLED_CTRL
     textCtrl = new wxStyledTextCtrl( EntryPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxEmptyString );
+
+    StyledTextTheme theme("cobalt");
+
+    textCtrl->SetLexer(wxSTC_LEX_MARKDOWN);
+
+    wxColour highlightColour = {};
+    for(int i=4 ; i<=10 ; i++) {
+        textCtrl->StyleSetForeground(i, theme.header_colour);
+        textCtrl->StyleSetBackground(i, theme.background_colour);
+    }
+
+    for(int i=10 ; i<=31 ; i++) {
+        textCtrl->StyleSetForeground(i, theme.code_block_colour);
+        textCtrl->StyleSetBackground(i, theme.background_colour);
+    }
+
+    textCtrl->StyleSetBackground(0, theme.background_colour); // Text bg
+    textCtrl->StyleSetBackground(1, theme.background_colour); // Newline bg
+    textCtrl->StyleSetBackground(wxSTC_STYLE_DEFAULT, theme.background_colour); // No-text bg
+    textCtrl->StyleSetForeground(0, theme.foreground_colour);
+
     textCtrl->SetUseTabs( true );
     textCtrl->SetTabWidth( 4 );
     textCtrl->SetIndent( 4 );
@@ -33,7 +55,7 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
     textCtrl->SetBackSpaceUnIndents( true );
     textCtrl->SetViewEOL( false );
     textCtrl->SetViewWhiteSpace( false );
-    textCtrl->SetMarginWidth( 2, 0 );
+    textCtrl->SetMarginWidth( 1, 0 );
     textCtrl->SetIndentationGuides( true );
     textCtrl->SetReadOnly( false );
     textCtrl->SetMarginType( 1, wxSTC_MARGIN_SYMBOL );
@@ -43,23 +65,9 @@ MainFrameCust::MainFrameCust() : MainFrame(NULL){
     textCtrl->SetProperty( wxT("fold"), wxT("1") );
     textCtrl->SetFoldFlags( wxSTC_FOLDFLAG_LINEBEFORE_CONTRACTED | wxSTC_FOLDFLAG_LINEAFTER_CONTRACTED );
     textCtrl->SetMarginType( 0, wxSTC_MARGIN_NUMBER );
-    textCtrl->SetMarginWidth( 0, textCtrl->TextWidth( wxSTC_STYLE_LINENUMBER, wxT("_99999") ) );
-    textCtrl->MarkerDefine( wxSTC_MARKNUM_FOLDER, wxSTC_MARK_BOXPLUS );
-    textCtrl->MarkerSetBackground( wxSTC_MARKNUM_FOLDER, wxColour( wxT("BLACK") ) );
-    textCtrl->MarkerSetForeground( wxSTC_MARKNUM_FOLDER, wxColour( wxT("WHITE") ) );
-    textCtrl->MarkerDefine( wxSTC_MARKNUM_FOLDEROPEN, wxSTC_MARK_BOXMINUS );
-    textCtrl->MarkerSetBackground( wxSTC_MARKNUM_FOLDEROPEN, wxColour( wxT("BLACK") ) );
-    textCtrl->MarkerSetForeground( wxSTC_MARKNUM_FOLDEROPEN, wxColour( wxT("WHITE") ) );
-    textCtrl->MarkerDefine( wxSTC_MARKNUM_FOLDERSUB, wxSTC_MARK_EMPTY );
-    textCtrl->MarkerDefine( wxSTC_MARKNUM_FOLDEREND, wxSTC_MARK_BOXPLUS );
-    textCtrl->MarkerSetBackground( wxSTC_MARKNUM_FOLDEREND, wxColour( wxT("BLACK") ) );
-    textCtrl->MarkerSetForeground( wxSTC_MARKNUM_FOLDEREND, wxColour( wxT("WHITE") ) );
-    textCtrl->MarkerDefine( wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_BOXMINUS );
-    textCtrl->MarkerSetBackground( wxSTC_MARKNUM_FOLDEROPENMID, wxColour( wxT("BLACK") ) );
-    textCtrl->MarkerSetForeground( wxSTC_MARKNUM_FOLDEROPENMID, wxColour( wxT("WHITE") ) );
-    textCtrl->MarkerDefine( wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_EMPTY );
-    textCtrl->MarkerDefine( wxSTC_MARKNUM_FOLDERTAIL, wxSTC_MARK_EMPTY );
-    textCtrl->SetSelBackground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHT ) );
+    textCtrl->SetMarginWidth( 0, textCtrl->TextWidth( wxSTC_STYLE_LINENUMBER, wxT("000") ) );
+
+    textCtrl->SetSelBackground( true, theme.highlight_colour );
     textCtrl->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
 
     EntrySizer->Add( textCtrl, 1, wxEXPAND | wxALL, 5 );
@@ -152,14 +160,15 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
     wxTextFile tfile;
     tfile.Open(currentFile);
 
-    textCtrl->Clear();
 
     str = tfile.GetFirstLine();
 
 #if USE_STYLED_CTRL
+    textCtrl->ClearAll();
     textCtrl->AddText(str);
     textCtrl->NewLine();
 #else
+    textCtrl->Clear();
     textCtrl->AppendText(str);
 #if defined(WIN32)
     textCtrl->AppendText(wxT("\r\n"));

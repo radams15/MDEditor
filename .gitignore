@@ -2,3 +2,6 @@
 /macbuild/
 *._.*
 /out/
+/buildmac/
+/buildwin/
+/MDEditor.app

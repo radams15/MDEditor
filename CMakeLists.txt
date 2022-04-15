@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_EXE_LINKER_FLAGS -Wl,--allow-multiple-definition)
 
 option(USE_WEBVIEW "Use wxWebView instead of wxHTML (Allows css & Js)" OFF)
-option(USE_STYLED_CTRL "Use wxStyledTextCtrl instead of wxTextCtrl (Allows nicer look)" OFF)
+option(USE_STYLED_CTRL "Use wxStyledTextCtrl instead of wxTextCtrl (Allows nicer look)" ON)
 
 add_subdirectory(lib/scidown)
 
@@ -36,7 +36,7 @@ if(APPLE)
     set(EXTRAS src/main/tweaks/Cocoa.mm)
 endif()
 
-add_executable(MDEditor MACOSX_BUNDLE src/main/main.cpp src/main/MainApp.cpp src/main/MainFrame.cpp src/main/MainFrameCust.cpp src/main/Converter.cpp src/main/Settings.cpp src/main/SettingsDlgCust.cpp ${EXTRAS})
+add_executable(MDEditor MACOSX_BUNDLE src/main/main.cpp src/main/MainApp.cpp src/main/MainFrame.cpp src/main/MainFrameCust.cpp src/main/Converter.cpp src/main/Settings.cpp src/main/SettingsDlgCust.cpp src/main/StyledTextTheme.cpp ${EXTRAS})
 
 if(USE_WEBVIEW)
     target_compile_definitions(MDEditor PRIVATE USE_WEBVIEW)
@@ -47,7 +47,11 @@ if(USE_STYLED_CTRL)
 endif()
 
 if(UNIX AND NOT APPLE)
-    target_compile_definitions(MDEditor PRIVATE DATA_DIR="/usr/local/share/MDEditor/data/")
+    if(DATA_DIR)
+    target_compile_definitions(MDEditor PRIVATE DATA_DIR="${DATA_DIR}")
+    else()
+        target_compile_definitions(MDEditor PRIVATE DATA_DIR="/usr/local/share/MDEditor/data/")
+    endif()
 endif()
 
 if(WIN32)
