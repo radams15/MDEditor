@@ -161,48 +161,7 @@ void MainFrameCust::OnOpen(wxCommandEvent &event) {
 
     currentFile = openFileDialog.GetPath();
 
-    SetLabel(wxString::Format(wxT("MD Editor: '%s'"), currentFile.mb_str()));
-
-    wxString str;
-
-    wxTextFile tfile;
-    tfile.Open(currentFile);
-
-
-    str = tfile.GetFirstLine();
-
-#if USE_STYLED_CTRL
-    textCtrl->ClearAll();
-    textCtrl->AddText(str);
-    textCtrl->NewLine();
-#else
-    textCtrl->Clear();
-    textCtrl->AppendText(str);
-#if defined(WIN32)
-    textCtrl->AppendText(wxT("\r\n"));
-#elif defined(__UNIX__)
-    textCtrl->AppendText(wxT("\n"));
-#else
-    textCtrl->AppendText(wxT("\r"));
-#endif
-#endif
-
-    while(!tfile.Eof()){
-        str = tfile.GetNextLine();
-#if USE_STYLED_CTRL
-        textCtrl->AddText(str);
-    textCtrl->NewLine();
-#else
-        textCtrl->AppendText(str);
-#if defined(WIN32)
-        textCtrl->AppendText(wxT("\r\n"));
-#elif defined(__UNIX__)
-        textCtrl->AppendText(wxT("\n"));
-#else
-        textCtrl->AppendText(wxT("\r"));
-#endif
-#endif
-    }
+    OpenFile(currentFile);
 }
 
 void MainFrameCust::OnExport(wxCommandEvent &event) {
@@ -265,4 +224,59 @@ void MainFrameCust::loadEntrySettings() {
         textCtrl->SetExtraStyle(wxTE_DONTWRAP);
     }
 #endif
+}
+
+void MainFrameCust::OpenFiles(wxArrayString files) {
+    if(files.Count() < 1){
+        return;
+    }
+
+    wxString file = files.Item(0);
+
+    OpenFile(file);
+}
+
+void MainFrameCust::OpenFile(wxString file) {
+    SetLabel(wxString::Format(wxT("MD Editor: '%s'"), currentFile.mb_str()));
+
+    wxString str;
+
+    wxTextFile tfile;
+    tfile.Open(file);
+
+
+    str = tfile.GetFirstLine();
+
+#if USE_STYLED_CTRL
+    textCtrl->ClearAll();
+    textCtrl->AddText(str);
+    textCtrl->NewLine();
+#else
+    textCtrl->Clear();
+    textCtrl->AppendText(str);
+#if defined(WIN32)
+    textCtrl->AppendText(wxT("\r\n"));
+#elif defined(__UNIX__)
+    textCtrl->AppendText(wxT("\n"));
+#else
+    textCtrl->AppendText(wxT("\r"));
+#endif
+#endif
+
+    while(!tfile.Eof()){
+        str = tfile.GetNextLine();
+#if USE_STYLED_CTRL
+        textCtrl->AddText(str);
+        textCtrl->NewLine();
+#else
+        textCtrl->AppendText(str);
+#if defined(WIN32)
+        textCtrl->AppendText(wxT("\r\n"));
+#elif defined(__UNIX__)
+        textCtrl->AppendText(wxT("\n"));
+#else
+        textCtrl->AppendText(wxT("\r"));
+#endif
+#endif
+    }
 }

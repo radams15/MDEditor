@@ -25,7 +25,7 @@ td.eq_code {
 	text-align: center;
 }
 
-.eq_table > tr, td, th, {
+.eq_table > tr, td, th {
 	border: 0;
 }
 

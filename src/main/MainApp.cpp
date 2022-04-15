@@ -10,6 +10,9 @@
 #endif
 
 bool MainApp::OnInit() {
+    if (!wxApp::OnInit())
+        return false;
+
     wxInitAllImageHandlers();
 
 #ifdef __WXMSW__
@@ -18,8 +21,26 @@ bool MainApp::OnInit() {
     rk.SetValue( wxT("MDeditor.exe"), 11001);
 #endif
 
-    MainFrame *frame = new MainFrameCust();
+    MainFrameCust *frame = new MainFrameCust();
     frame->Show(true);
+
+    frame->OpenFiles(files);
+
+    return true;
+}
+
+
+void MainApp::OnInitCmdLine(wxCmdLineParser& parser) {
+    parser.SetDesc (g_cmdLineDesc);
+
+    parser.SetSwitchChars (wxT("-"));
+}
+
+bool MainApp::OnCmdLineParsed(wxCmdLineParser& parser) {
+    for (int i = 0; i < parser.GetParamCount(); i++){
+        wxString param = parser.GetParam(i);
+        files.Add(param);
+    }
 
     return true;
 }
