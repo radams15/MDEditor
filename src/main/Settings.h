@@ -21,7 +21,7 @@
 #endif
 
 #ifndef __APPLE__
-#define GET_DATA(f) wxT(DATA_DIR) wxT(SEP) f
+#define GET_DATA(f) wxT(DATA_DIR SEP f)
 #else
 extern "C" const char* getResourcePath(const char* file);
 
