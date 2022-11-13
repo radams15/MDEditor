@@ -8,7 +8,7 @@ pipeline {
 			}
 
 			steps{
-				sh 'mkdir build && cd build && cmake .. && make -j8'
+				sh 'mkdir -p build && cd build && cmake .. && make -j8'
 
 				archiveArtifacts artifacts: 'MDEditor'
 			}
