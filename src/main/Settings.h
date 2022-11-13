@@ -9,11 +9,11 @@
 #include <wx/string.h>
 
 #if defined(WIN32)
-#define SEP "\\"
+#define SEP wxT("\\")
 #elif defined(__UNIX__)
-#define SEP "/"
+#define SEP wxT("/")
 #else
-#define SEP ":"
+#define SEP wxT(":")
 #endif
 
 #ifndef DATA_DIR

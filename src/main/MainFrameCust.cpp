@@ -20,9 +20,11 @@ void loadStyleTheme(wxStyledTextCtrl* textCtrl){
 
     StyledTextTheme theme(s->editorStyle);
 
+#ifdef wxSTC_LEX_MARKDOWN
     textCtrl->SetLexer(wxSTC_LEX_MARKDOWN);
+#endif
 
-    wxColour highlightColour = {};
+    wxColour highlightColour;
     for(int i=4 ; i<=10 ; i++) {
         textCtrl->StyleSetForeground(i, theme.header_colour);
         textCtrl->StyleSetBackground(i, theme.background_colour);
@@ -237,7 +239,7 @@ void MainFrameCust::OpenFiles(wxArrayString files) {
 }
 
 void MainFrameCust::OpenFile(wxString file) {
-    SetLabel(wxString::Format(wxT("MD Editor: '%s'"), currentFile.mb_str()));
+    SetLabel(wxString::Format(wxT("MD Editor: '%s'"), currentFile.c_str()));
 
     wxString str;
 

@@ -28,7 +28,7 @@ wxString join(wxString a, wxString b){
 
 wxString getFileContent(wxString file){
     if(! wxFileExists(file)) {
-        wxLogError(wxT("Cannot open file '%s'\n"), file.mb_str());
+        wxLogError(wxT("Cannot open file '%s'\n"), file.c_str());
         return wxT("");
     }
 
@@ -125,12 +125,14 @@ wxString Converter::md2html(wxString in){
 
     buffer = hoedown_buffer_new(500);
 
-    const char* data = in.mb_str();
+    const char* data = (const char*) strdup((const char*) in.mb_str());
     hoedown_document_render(document, buffer, (uint8_t*) data, in.length(), 0);
 
     const char* buf_cstr = hoedown_buffer_cstr(buffer);
 
     wxString html = wxString::FromUTF8(buf_cstr);
+	
+	//printf("HTML: %s\n", buf_cstr);
 
     free(def.extra_header);
     free(def.extra_closing);

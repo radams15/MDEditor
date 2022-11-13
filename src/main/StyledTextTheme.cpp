@@ -9,7 +9,7 @@
 
 #include "Settings.h"
 
-#define READ_COLOUR(conf,key,out) buf="";conf.Read(key,&buf); if(! buf.IsEmpty()){out = toColour(buf);}else{}
+#define READ_COLOUR(conf,key,out) buf=wxT("");conf.Read(key,&buf); if(! buf.IsEmpty()){out = toColour(buf);}else{}
 
 
 bool SplitToken(const wxString& input, const wxChar& sep, wxString& rLeft, wxString& rRight){
@@ -32,9 +32,9 @@ wxColour toColour(wxString in){
     SplitToken(in, ',', rs, tmp);
     SplitToken(tmp, ',', gs, bs);
 
-    rs.ToCLong(&r);
-    gs.ToCLong(&g);
-    bs.ToCLong(&b);
+    rs.ToLong(&r);
+    gs.ToLong(&g);
+    bs.ToLong(&b);
 
     return wxColour(r,g,b);
 }
@@ -42,7 +42,7 @@ wxColour toColour(wxString in){
 StyledTextTheme::StyledTextTheme(wxString file) {
     Settings* s = Settings::init();
 
-    path = s->editorStyleDir + SEP + file + ".theme";
+    path = s->editorStyleDir + SEP + file + wxT(".theme");
 
     load();
 }
@@ -55,9 +55,9 @@ void StyledTextTheme::load() {
 
     wxString buf;
 
-    READ_COLOUR(conf, "background_colour", background_colour);
-    READ_COLOUR(conf, "foreground_colour", foreground_colour);
-    READ_COLOUR(conf, "header_colour", header_colour);
-    READ_COLOUR(conf, "highlight_colour", highlight_colour);
-    READ_COLOUR(conf, "code_block_colour", code_block_colour);
+    READ_COLOUR(conf, wxT("background_colour"), background_colour);
+    READ_COLOUR(conf, wxT("foreground_colour"), foreground_colour);
+    READ_COLOUR(conf, wxT("header_colour"), header_colour);
+    READ_COLOUR(conf, wxT("highlight_colour"), highlight_colour);
+    READ_COLOUR(conf, wxT("code_block_colour"), code_block_colour);
 }

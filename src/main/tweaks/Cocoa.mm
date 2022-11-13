@@ -29,7 +29,7 @@ extern "C" const char* getResourcePath(const char* file){
 
     NSString* path = [bundle pathForResource:fileName ofType:extension];
 
-    //NSLog(@"Path: %@\n", path);
+    //NSLog(@"Path for %@: %@\n", nsFile, path);
 
     return [path UTF8String];
 }

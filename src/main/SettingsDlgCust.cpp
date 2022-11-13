@@ -26,7 +26,7 @@ void SettingsDlgCust::loadEditor() {
 
     StyleCombo->Clear();
     wxArrayString styleThemes = filesInDir(settings->editorStyleDir);
-    for(int i=0 ; i<styleThemes.Count() ; i++){styleThemes.Item(i).Replace(".theme","");}
+    for(int i=0 ; i<styleThemes.Count() ; i++){styleThemes.Item(i).Replace(wxT(".theme"),wxT(""));}
     setCombo(StyleCombo, styleThemes);
     StyleCombo->SetSelection(styleThemes.Index(settings->editorStyle));
 }
@@ -79,7 +79,7 @@ wxArrayString SettingsDlgCust::filesInDir(wxString dirs) {
     wxArrayString out;
 
     if ( !dir.IsOpened() ){
-        wxLogError(wxT("Cannot open directory: %s\n"), dirs.mb_str());
+        wxLogError(wxT("Cannot open directory: %s\n"), dirs.c_str());
         return out;
     }
 

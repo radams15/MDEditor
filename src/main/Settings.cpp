@@ -8,12 +8,11 @@
 Settings::Settings() {
     doLineWrap = true;
 
-    //TODO Don't hardcode for my machine
-    cssDir = GET_DATA(wxT("css_styles"));
-    codeBlockDir = GET_DATA(wxT("highlight_styles"));
-    scidownCssFile = GET_DATA(wxT("scidown.css"));
-    scriptDir = GET_DATA(wxT("scripts"));
-    editorStyleDir = GET_DATA(wxT("themes"));
+    cssDir = GET_DATA("css_styles");
+    codeBlockDir = GET_DATA("highlight_styles");
+    scidownCssFile = GET_DATA("scidown.css");
+    scriptDir = GET_DATA("scripts");
+    editorStyleDir = GET_DATA("themes");
 
     cssTheme = wxT("swiss.css");
     codeBlockStyle = wxT("default.css");
