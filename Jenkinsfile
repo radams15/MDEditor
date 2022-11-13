@@ -7,9 +7,11 @@ pipeline {
 				dockerfile true
 			}
 
-			sh 'mkdir build && cd build && cmake .. && make -j8'
+			steps{
+				sh 'mkdir build && cd build && cmake .. && make -j8'
 
-			archiveArtifacts artifacts: 'MDEditor'
+				archiveArtifacts artifacts: 'MDEditor'
+			}
 		}
 	}
 }
