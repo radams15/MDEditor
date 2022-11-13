@@ -10,7 +10,7 @@ pipeline {
 			steps{
 				sh 'mkdir -p build && cd build && cmake .. && make -j8'
 
-				archiveArtifacts artifacts: 'MDEditor'
+				archiveArtifacts artifacts: 'build/MDEditor'
 			}
 		}
 	}
