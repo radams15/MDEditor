@@ -12,6 +12,18 @@ pipeline {
 
 				archiveArtifacts artifacts: 'build/MDEditor'
 			}
+
+		stage('Mac') {
+			agent {
+
+			}
+
+			steps{
+				sh 'mkdir -p build && cd build && cmake .. && make -j8'
+
+				archiveArtifacts artifacts: 'build/MDEditor'
+			}
+		}
 		}
 	}
 }
